@@ -2,7 +2,7 @@ import {
   CANONICAL_FIELDS,FIELD_LABELS,REQUIRED_FIELDS,proposeMappings,
   parseCSV,parseCourseReferenceCSV,analyzeImport,certificationGate,maskStudentKey
 } from './core.mjs';
-import {listImports,saveImport,withdrawImport,activeRecords,restoreImports} from './storage.mjs';
+import {listImports,saveImport,withdrawImport,activeRecords,restoreImports,listPathways,restorePathways} from './storage.mjs';
 import {createBackup,readBackup} from './backup.mjs';
 
 const state={file:null,fileBytes:null,rows:[],headers:[],suggestions:[],reference:new Map(),resolutions:{terms:{},courses:{},duplicates:{}},analysis:null,fingerprint:'',sheetNames:[]};
@@ -227,12 +227,13 @@ $('backupBtn').addEventListener('click',async()=>{
     if(!imports.length) throw new Error('No import history exists to back up.');
     const missingSources=imports.filter(i=>!i.sourceFile).length;
     if(backupUrl) URL.revokeObjectURL(backupUrl);
-    backupUrl=URL.createObjectURL(new Blob([await createBackup(imports)],{type:'application/json'}));
+    const pathways=await listPathways();
+    backupUrl=URL.createObjectURL(new Blob([await createBackup(imports,pathways)],{type:'application/json'}));
     const link=$('backupLink');
     link.href=backupUrl;
     link.download=`sdoc-arts-audit-${new Date().toISOString().slice(0,10)}.json`;
     link.hidden=false;
-    label.textContent=`Backup ready: ${fmt(imports.length)} imports. ${missingSources?`${fmt(missingSources)} older import${missingSources===1?' has':'s have'} raw rows but no original source bytes; keep those original files separately. `:''}Click Download backup and save it in district-approved protected storage.`;
+    label.textContent=`Backup ready: ${fmt(imports.length)} imports and ${fmt(pathways.length)} pathway classifications. ${missingSources?`${fmt(missingSources)} older import${missingSources===1?' has':'s have'} raw rows but no original source bytes; keep those original files separately. `:''}Click Download backup and save it in district-approved protected storage.`;
     label.className=`status ${missingSources?'warning':'success'}`;
   }catch(e){label.textContent=e.message;label.className='status error';}
 });
@@ -243,12 +244,14 @@ $('restoreBtn').addEventListener('click',async()=>{
     const file=$('restoreFile').files[0];
     if(!file) throw new Error('Choose a backup JSON file first.');
     if((await listImports()).length) throw new Error('Restore requires an empty import history. Use a fresh browser profile.');
-    const records=await readBackup(await file.text());
+    const restored=await readBackup(await file.text());
+    const records=restored.records;
     if(!records.length) throw new Error('Backup contains no imports.');
     const missingSources=records.filter(r=>!r.sourceFile).length;
     await restoreImports(records);
+    await restorePathways(restored.pathways||[]);
     await renderHistory();
-    label.textContent=`Restored ${fmt(records.length)} imports and audit history. ${missingSources?`${fmt(missingSources)} older import${missingSources===1?' has':'s have'} raw rows but no original source bytes; keep those original files separately.`:'Original source files were restored.'}`;
+    label.textContent=`Restored ${fmt(records.length)} imports, ${fmt((restored.pathways||[]).length)} pathway classifications, and audit history. ${missingSources?`${fmt(missingSources)} older import${missingSources===1?' has':'s have'} raw rows but no original source bytes; keep those original files separately.`:'Original source files were restored.'}`;
     label.className=`status ${missingSources?'warning':'success'}`;
   }catch(e){label.textContent=e.message||String(e);label.className='status error';}
 });
