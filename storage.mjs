@@ -1,6 +1,7 @@
 const DB_NAME='sdoc-arts-importer';
-const DB_VERSION=1;
+const DB_VERSION=2;
 const IMPORTS='imports';
+const PATHWAYS='pathways';
 
 function openDb(){
   return new Promise((resolve,reject)=>{
@@ -8,6 +9,7 @@ function openDb(){
     req.onupgradeneeded=()=>{
       const db=req.result;
       if(!db.objectStoreNames.contains(IMPORTS)) db.createObjectStore(IMPORTS,{keyPath:'id'});
+      if(!db.objectStoreNames.contains(PATHWAYS)) db.createObjectStore(PATHWAYS,{keyPath:'code'});
     };
     req.onsuccess=()=>resolve(req.result);
     req.onerror=()=>reject(req.error);
@@ -56,6 +58,42 @@ export async function restoreImports(records){
     const store=tx.objectStore(IMPORTS);
     const complete=new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Restore failed.'));});
     records.forEach(record=>store.add(record));
+    await complete;
+  }finally{ db.close(); }
+}
+
+
+export async function listPathways(){
+  const db=await openDb(); const tx=db.transaction(PATHWAYS,'readonly');
+  const all=await reqPromise(tx.objectStore(PATHWAYS).getAll()); db.close();
+  return all.sort((a,b)=>String(a.code).localeCompare(String(b.code)));
+}
+
+export async function savePathway(record){
+  if(!record?.code) throw new Error('Pathway classification requires a Course Code.');
+  const db=await openDb(); const tx=db.transaction(PATHWAYS,'readwrite');
+  await reqPromise(tx.objectStore(PATHWAYS).put(record)); db.close(); return record;
+}
+
+export async function savePathways(records){
+  const db=await openDb();
+  try{
+    const tx=db.transaction(PATHWAYS,'readwrite');
+    const store=tx.objectStore(PATHWAYS);
+    const complete=new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Pathway save failed.'));});
+    records.forEach(record=>{ if(record?.code) store.put(record); });
+    await complete;
+  }finally{ db.close(); }
+}
+
+export async function restorePathways(records){
+  if(!Array.isArray(records) || !records.length) return;
+  const db=await openDb();
+  try{
+    const tx=db.transaction(PATHWAYS,'readwrite');
+    const store=tx.objectStore(PATHWAYS);
+    const complete=new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Pathway restore failed.'));});
+    records.forEach(record=>{ if(record?.code) store.put(record); });
     await complete;
   }finally{ db.close(); }
 }
