@@ -87,12 +87,12 @@ function unmappedColumns(){
 
 function renderValidation(a){
   const metrics=[
-    ['Source rows',a.counts.sourceRows],['Eligible now',a.counts.accepted],['Held for review',a.counts.held],['Excluded',a.counts.excluded],['Exact duplicates',a.counts.exactDuplicates],
+    ['Source rows',a.counts.sourceRows],['Eligible now',a.counts.accepted],['Held for review',a.counts.held],['Auto-excluded non-arts',a.counts.autoReferenceExcluded||0],['Excluded total',a.counts.excluded],['Exact duplicates',a.counts.exactDuplicates],
     ['Unique eligible students',a.uniqueStudents],['Schools',a.schools.length],['School years',a.years.length],['Course codes',a.codes.length]
   ];
   $('metrics').innerHTML=metrics.map(([k,v])=>`<div class="metric"><span>${esc(k)}</span><strong>${fmt(v)}</strong></div>`).join('');
   const pct=(a.fldoeCoverage*100).toFixed(1);
-  $('quality').innerHTML=`<div><strong>FLDOE course-match coverage:</strong> ${pct}%</div><div><strong>Reconciliation:</strong> ${a.reconciles?'Balanced':'NOT BALANCED'}</div><div><strong>Detected terms:</strong> ${Object.entries(a.terms).map(([k,v])=>`${esc(k)} ${fmt(v)}`).join(' · ')||'None'}</div><div><strong>Unmapped source columns:</strong> ${unmappedColumns().map(esc).join(', ')||'None'}</div>`;
+  $('quality').innerHTML=`<div><strong>Florida arts reference filter:</strong> A row is kept when its course code OR exact normalized course title matches the appropriate Florida arts reference. Secondary rows use the Grades 6-8 and Grades 9-12 references. Nonmatching rows are excluded automatically but remain preserved in the raw audit.</div><div><strong>FLDOE course-match coverage:</strong> ${pct}%</div><div><strong>Reconciliation:</strong> ${a.reconciles?'Balanced':'NOT BALANCED'}</div><div><strong>Detected terms:</strong> ${Object.entries(a.terms).map(([k,v])=>`${esc(k)} ${fmt(v)}`).join(' · ')||'None'}</div><div><strong>Unmapped source columns:</strong> ${unmappedColumns().map(esc).join(', ')||'None'}</div>`;
   const groups={};
   a.issues.forEach(i=>(groups[i.type]??=[]).push(i));
   $('issues').innerHTML=Object.keys(groups).length
@@ -109,14 +109,10 @@ function renderValidation(a){
 
 function renderResolvers(a){
   const unknownTerms=[...new Set(a.issues.filter(i=>i.type==='Unknown Term').map(i=>i.detail))];
-  const unknownCodes=[...new Set(a.issues.filter(i=>i.type==='Questionable Course Code').map(i=>i.courseCode||i.detail))];
   const dupRows=a.rows.filter(r=>r.issues.some(i=>i.type==='Possible Duplicate') && !r.duplicateResolved);
   const parts=[];
   if(unknownTerms.length){
     parts.push(`<h3>Unknown terms</h3>${unknownTerms.map(t=>`<div class="resolver"><span><strong>${esc(t)}</strong></span><select class="term-resolution" data-term="${esc(t)}"><option value="">Choose…</option>${['Fall','Spring','Yearlong','Summer','Other'].map(v=>`<option ${state.resolutions.terms[t]===v?'selected':''}>${v}</option>`).join('')}</select></div>`).join('')}`);
-  }
-  if(unknownCodes.length){
-    parts.push(`<h3>Unknown course codes</h3>${unknownCodes.map(code=>{const r=state.resolutions.courses[code]||{};return `<div class="resolver wide"><span><strong>${esc(code)}</strong></span><select class="course-action" data-code="${esc(code)}"><option value="">Choose…</option><option value="local" ${r.action==='local'?'selected':''}>Identify as local course</option><option value="exclude" ${r.action==='exclude'?'selected':''}>Exclude from arts analytics</option><option value="hold" ${r.action==='hold'?'selected':''}>Hold for review</option><option value="map" ${r.action==='map'?'selected':''}>Map to FLDOE code</option></select><input class="course-target" data-code="${esc(code)}" placeholder="FLDOE code if mapping" value="${esc(r.target||'')}"></div>`}).join('')}`);
   }
   if(dupRows.length){
     parts.push(`<h3>Possible duplicates</h3>${dupRows.map(r=>`<div class="resolver wide"><span>Row ${r.sourceRow} · ${esc(maskStudentKey(r.mapped.student_id))} · ${esc(r.mapped.course_code)}</span><select class="dup-action" data-row="${r.sourceRow}"><option value="">Choose…</option><option value="keep">Keep as legitimate enrollment</option><option value="exclude">Exclude row</option><option value="hold">Hold for review</option></select></div>`).join('')}`);
@@ -124,17 +120,6 @@ function renderResolvers(a){
   $('resolvers').innerHTML=parts.join('')||'<div class="successbox">Nothing requires manual resolution.</div>';
   document.querySelectorAll('.term-resolution').forEach(el=>el.onchange=()=>{
     if(el.value)state.resolutions.terms[el.dataset.term]=el.value;else delete state.resolutions.terms[el.dataset.term];
-    runAnalysis();
-  });
-  document.querySelectorAll('.course-action').forEach(el=>el.onchange=()=>{
-    const code=el.dataset.code;
-    state.resolutions.courses[code]={action:el.value,target:document.querySelector(`.course-target[data-code="${CSS.escape(code)}"]`)?.value||''};
-    runAnalysis();
-  });
-  document.querySelectorAll('.course-target').forEach(el=>el.onchange=()=>{
-    const code=el.dataset.code;
-    const action=document.querySelector(`.course-action[data-code="${CSS.escape(code)}"]`)?.value||'map';
-    state.resolutions.courses[code]={action,target:el.value};
     runAnalysis();
   });
   document.querySelectorAll('.dup-action').forEach(el=>el.onchange=()=>{
