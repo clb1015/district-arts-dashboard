@@ -199,12 +199,12 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
       }
     }
     const isAdministrativeWaiver=ADMINISTRATIVE_WAIVER_CODES.has(mapped.course_code);
-    if(isAdministrativeWaiver) rowIssues.push({type:'Administrative Waiver Excluded',detail:`${mapped.course_code} is a non-instructional waiver; retained in source audit only.`});
 
     const exactSig=stableObjectString(raw);
     const exactFirst=exactSeen.get(exactSig);
     if(exactFirst){ counts.exactDuplicates++; rowIssues.push({type:'Exact Duplicate',detail:`Matches source row ${exactFirst}`}); }
     else exactSeen.set(exactSig, raw.__row_number);
+    if(isAdministrativeWaiver && !exactFirst) rowIssues.push({type:'Administrative Waiver Excluded',detail:`${mapped.course_code} is a non-instructional waiver; retained in source audit only.`});
 
     const identityBase=[mapped.student_id,mapped.school_year,mapped.term,mapped.school,mapped.course_code].join('|');
     const identity=mapped.section ? `${identityBase}|${mapped.section}` : identityBase;

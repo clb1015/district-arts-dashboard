@@ -118,6 +118,7 @@ test('administrative waivers stay in source audit but out of enrollment and cove
   assert.equal(certificationGate(a).ready,true);
   assert.deepEqual(a.rows.filter(r=>r.disposition==='excluded').map(r=>r.mapped.course_code),waiverCodes);
   assert.equal(a.rows[4].disposition,'duplicate');
+  assert.equal(a.issues.filter(i=>i.type==='Administrative Waiver Excluded').length,4);
   assert.equal(a.rows[0].raw['Course Num'],'1500440');
   assert.equal(a.rows[0].exclusionReason,'Administrative waiver');
 });
