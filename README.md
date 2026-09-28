@@ -67,6 +67,12 @@ The synthetic acceptance fixture checks:
 
 Do not create another independent importer or duplicate course-matching engine. Changes to enrollment ingestion belong here.
 
+## Course reference provenance
+
+`data/florida-arts-courses.csv` is a curated arts-course reference, not the full Florida Course Code Directory. On September 28, 2026, all 366 bundled codes were checked against FLDOE's [2026–27 District Course File](https://www.fldoe.org/file/7746/2627-CCD.xlsx) linked from the [2026–27 Course Directory](https://www.fldoe.org/policy/articulation/ccd/2026-2027-course-directory.stml). The downloaded workbook had SHA-256 `22f832960a37e735d037ab80c39f6a30f6dd86d9de20d8f47d4296621c95734d`. Two incorrect bundled titles were corrected to the official wording; other title differences are mostly formatting and the importer matches by code.
+
+Administrative waiver codes `1500440`, `1500441`, `1500442`, and `1500445` appear in the reference. Their presence does not establish that they count as arts enrollment. Set district inclusion rules and local-course mappings before using coverage as a participation metric.
+
 
 ## Acceptance status
 
