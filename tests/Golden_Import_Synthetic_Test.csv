@@ -1,0 +1,14 @@
+Student Number,Campus,Academic Year,Semester Name,Course Num,Class Name,Instructor,Grade Level,Sec Num,Local Extra
+SYN-0001,Harmony Middle School,2026-27,Semester 1,1302300,Band 1,Teacher A,6,001,source-A
+SYN-0001,Harmony Middle School,2026-27,Semester 2,1302300,Band 1,Teacher A,6,001,source-A
+SYN-0002,Harmony Middle School,2026-27,S1,1302300,Band 1,Teacher A,6,001,source-A
+SYN-0002,Harmony Middle School,2026-27,S1,1302300,Band 1,Teacher A,6,002,source-A
+SYN-0003,Harmony Middle School,2026-27,Fall,1302310,Band 2,Teacher A,7,,source-A
+SYN-0004,St. Cloud High School,2026-27,Annual,0400310,Theatre 1,Teacher B,9,101,source-B
+SYN-0005,St. Cloud High School,2026-27,Full Year,0400410,Technical Theatre: Design & Production 1,Teacher C,10,201,source-B
+SYN-0006,St. Cloud High School,2026-27,Sem 2,0400310,Theatre 1,Teacher B,9,102,source-B
+SYN-0007,Tohopekaliga High School,2026-27,T2,1302300,Band 1,Teacher D,9,301,source-C
+SYN-0008,Tohopekaliga High School,2026-27,Spring,9999999,Local Music Lab,Teacher D,10,302,source-C
+SYN-0009,Tohopekaliga High School,2026-27,Spring,1302300,Band 1,Teacher D,9,303,source-C
+SYN-0010,Tohopekaliga High School,2026-27,Spring,1302300,Band 1,Teacher D,9,304,source-C
+SYN-0001,Harmony Middle School,2026-27,Semester 1,1302300,Band 1,Teacher A,6,001,source-A
