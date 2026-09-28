@@ -1,0 +1,367 @@
+Discipline Category,Source Document,Course Code,Abbreviated Title,Full Course Title,Course Length,Notes & Flags
+Art / Visual Arts,Pre-K to 5,5001010,ART GRADE K,Art Grade Kindergarten,Y,Elementary visual arts core
+Art / Visual Arts,Pre-K to 5,5001020,ART GRADE 1,Art Grade 1,Y,Elementary visual arts core
+Art / Visual Arts,Pre-K to 5,5001030,ART GRADE 2,Art Grade 2,Y,Elementary visual arts core
+Art / Visual Arts,Pre-K to 5,5001040,ART INTERM 1,Art Intermediate 1,Y,Elementary visual arts core
+Art / Visual Arts,Pre-K to 5,5001050,ART INTERM 2,Art Intermediate 2,Y,Elementary visual arts core
+Art / Visual Arts,Pre-K to 5,5001060,ART INTERM 3,Art Intermediate 3,Y,Elementary visual arts core
+Art / Visual Arts,Pre-K to 5,5001100,PRIMARY ART GR K,Cambridge Primary Art and Design Grade Kindergarten,Y,Cambridge Primary program
+Art / Visual Arts,Pre-K to 5,5001105,PRIMARY ART GR 1,Cambridge Primary Art and Design Grade 1,Y,Cambridge Primary program
+Art / Visual Arts,Pre-K to 5,5001110,PRIMARY ART GR 2,Cambridge Primary Art and Design Grade 2,Y,Cambridge Primary program
+Art / Visual Arts,Pre-K to 5,5001115,PRIMARY ART GR 3,Cambridge Primary Art and Design Grade 3,Y,Cambridge Primary program
+Art / Visual Arts,Pre-K to 5,5001120,PRIMARY ART GR 4,Cambridge Primary Art and Design Grade 4,Y,Cambridge Primary program
+Art / Visual Arts,Pre-K to 5,5001125,PRIMARY ART GR 5,Cambridge Primary Art and Design Grade 5,Y,Cambridge Primary program
+Art / Visual Arts,Grades 6-8,0100060,M/J INTRO ART HIST,M/J Introduction to Art History,S,Art Appreciation / History
+Art / Visual Arts,Grades 6-8,0100070,M/J ART WORLD CULTR,M/J Art in World Cultures,S,Art Appreciation / History
+Art / Visual Arts,Grades 6-8,0101005,M/J EXPLORING 2D ART,M/J Exploring Two-Dimensional Art,S,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101010,M/J 2-D STUDIO ART 1,M/J Two-Dimensional Studio Art 1,Y,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101020,M/J 2-D STUDIO ART 2,M/J Two-Dimensional Studio Art 2,Y,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101025,M/J 2D STUD ART 2 CP,M/J Two-Dimensional Studio Art 2 & Career Planning,Y,Includes career component
+Art / Visual Arts,Grades 6-8,0101026,M/J 2D STUDIO ART 3,M/J Two-Dimensional Studio Art 3,Y,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101035,M/J EXPLORING 3D ART,M/J Exploring Three-Dimensional Art,S,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101040,M/J 3-D STUDIO ART 1,M/J Three-Dimensional Studio Art 1,Y,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101050,M/J 3-D STUDIO ART 2,M/J Three-Dimensional Studio Art 2,Y,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101060,M/J 3D STUDIO ART 3,M/J Three-Dimensional Studio Art 3,Y,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101100,M/VISUAL ART 1,M/J Visual Art 1,S,Abbreviated title printed as M/VISUAL ART 1
+Art / Visual Arts,Grades 6-8,0101110,M/J VISUAL ART 2,M/J Visual Art 2,S,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0101120,M/J VISUAL ART 3,M/J Visual Art 3,S,Studio Art Comprehensive
+Art / Visual Arts,Grades 6-8,0102040,M/J CREATIVE PHOTO 1,M/J Creative Photography 1,Y,Photography
+Art / Visual Arts,Grades 6-8,0102050,M/J CREATIVE PHOTO 2,M/J Creative Photography 2,Y,Photography
+Art / Visual Arts,Grades 6-8,0103000,M/J DIG ART & DES 1,M/J Digital Art & Design 1,Y,Digital Arts
+Art / Visual Arts,Grades 6-8,0103010,M/J DIG ART & DES 2,M/J Digital Art & Design 2,Y,Digital Arts
+Art / Visual Arts,Grades 6-8,0103020,M/J DIG ART DESIGN 3,M/J Digital Art and Design 3,Y,Digital Arts
+Art / Visual Arts,Grades 6-8,0103030,M/J IB MYP GRAPH DES,M/J International Baccalaureate Middle Years Program Graphic Design,S,IB Middle Years Programme
+Art / Visual Arts,Grades 6-8,0103031,M/J IB MYP ADV GRAPH,M/J International Baccalaureate Middle Years Program Advanced Graphic Design,S,IB Middle Years Programme
+Art / Visual Arts,Grades 6-8,0103035,M/J ART & DES 1 CLS,M/J Art and Design 1 Cambridge Lower Secondary,S,Cambridge Lower Secondary
+Art / Visual Arts,Grades 6-8,0103040,M/J ART & DES 2 CLS,M/J Art and Design 2 Cambridge Lower Secondary,S,Cambridge Lower Secondary
+Art / Visual Arts,Grades 6-8,0103045,M/J ART & DES 3 CLS,M/J Art and Design 3 Cambridge Lower Secondary,S,Cambridge Lower Secondary
+Art / Visual Arts,Grades 6-8,0100220,M/J ART TRANSFER,M/J Art Transfer,Z,Transfer credit code
+Art / Visual Arts,Grades 9-12,0100300,AP ART HISTORY,Advanced Placement Art History,Y,Level 3 / AP
+Art / Visual Arts,Grades 9-12,0100310,INTRO TO ART HIST,Introduction to Art History,S,Level 2
+Art / Visual Arts,Grades 9-12,0100320,ART IN WRLD CULTURES,Art in World Cultures,S,Level 2
+Art / Visual Arts,Grades 9-12,0100330,ART HIST & CRIT 1 H,Art History and Criticism 1 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0101300,2-D STUDIO ART 1,Two-Dimensional Studio Art 1,Y,Level 2
+Art / Visual Arts,Grades 9-12,0101310,2-D STUDIO ART 2,Two-Dimensional Studio Art 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0101320,2-D STUDIO ART 3 HON,Two-Dimensional Studio Art 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0101330,3-D STUDIO ART 1,Three-Dimensional Studio Art 1,Y,Level 2
+Art / Visual Arts,Grades 9-12,0101340,3-D STUDIO ART 2,Three-Dimensional Studio Art 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0101350,3-D STUDIO ART 3 HON,Three-Dimensional Studio Art 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0101355,CREATING 2-D ART,Creating Two-Dimensional Art,S,Level 2
+Art / Visual Arts,Grades 9-12,0101365,CREATING 3-D ART,Creating Three-Dimensional Art,S,Level 2
+Art / Visual Arts,Grades 9-12,0101370,AICE ART&DESIGN 1 AS,Cambridge AICE Art & Design 1 AS Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0101371,AICE ART&DESIGN 2 AL,Cambridge AICE Art & Design 2 A Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0101375,PRE-AICE ART&DES3DIG,Cambridge AICE Art & Design: 3D Studies IGCSE Level,Y,Cambridge IGCSE Level
+Art / Visual Arts,Grades 9-12,0101440,FIN CFT STUD ART 1,Fine Craft Studio Art 1,Y,Level 2
+Art / Visual Arts,Grades 9-12,0101450,FIN CFT STUD ART 2,Fine Craft Studio Art 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0102340,ART COLLAB DSGN HON,"Art Collaboration: Designing Solutions for Art, Work, and Life Honors",Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0102300,CERAM/POT 1,Ceramics/Pottery 1,Y,Level 2 (Full Year)
+Art / Visual Arts,Grades 9-12,0102305,CERAM/POT 1,Ceramics/Pottery 1,S,Level 2 (Semester version)
+Art / Visual Arts,Grades 9-12,0102310,CERAM/POT 2,Ceramics/Pottery 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0102320,CERAM/POT 3 HON,Ceramics/Pottery 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0102330,AICE ART&DES CER AS,Cambridge AICE Art & Design: Ceramics AS Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0106320,AICE ART&DES GD AS,Cambridge AICE Art & Design: Graphic Design AS Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0108370,DIGITAL ART IMG 1,Digital Art Imaging 1,Y,Level 2
+Art / Visual Arts,Grades 9-12,0108380,DIGITAL ART IMG 2,Digital Art Imaging 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0108390,DIGITAL ART IMG 3 H,Digital Art Imaging 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0108400,AICE DIG MEDIA&DES1,Cambridge AICE Digital Media & Design 1 AS Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0108410,AICE DIG MEDIA&DES2,Cambridge AICE Digital Media & Design 2 A Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0108450,IB MYP GRAPHIC ARTS,International Baccalaureate MYP Graphic Arts,Y,IB Middle Years Programme
+Art / Visual Arts,Grades 9-12,0104300,AP DRAWING,Advanced Placement Drawing,Y,AP Studio Art
+Art / Visual Arts,Grades 9-12,0104335,DRAW 1,Drawing 1,S,Level 2 (Semester version)
+Art / Visual Arts,Grades 9-12,0104340,DRAW 1,Drawing 1,Y,Level 2 (Full Year)
+Art / Visual Arts,Grades 9-12,0104350,DRAW 2,Drawing 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0104360,DRAW 3 HON,Drawing 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0104365,PAINT 1,Painting 1,S,Level 2 (Semester version)
+Art / Visual Arts,Grades 9-12,0104370,PAINT 1,Painting 1,Y,Level 2 (Full Year)
+Art / Visual Arts,Grades 9-12,0104380,PAINT 2,Painting 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0104390,PAINT 3 HON,Painting 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0104410,FIG DRAW,Figure Drawing,Y,Level 2
+Art / Visual Arts,Grades 9-12,0104415,PRE-AICE A&D P&M IG,Cambridge Pre-AICE Art & Design: Painting & Related Media IGCSE Level,Y,Cambridge IGCSE Level
+Art / Visual Arts,Grades 9-12,0104420,AICE ART&DES P&M AS,Cambridge AICE Art & Design: Painting & Related Media AS Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0105315,PRE-AICE A&D TD IG,Cambridge Pre-AICE Art & Design: Textile Design IGCSE Level,Y,Cambridge IGCSE Level
+Art / Visual Arts,Grades 9-12,0107410,FILM 1,Film 1,Y,Photography/Film
+Art / Visual Arts,Grades 9-12,0107420,FILM 2,Film 2,Y,Photography/Film
+Art / Visual Arts,Grades 9-12,0107430,FILM 3 HON,Film 3 Honors,Y,Photography/Film
+Art / Visual Arts,Grades 9-12,0107440,VISUAL TECH 1,Visual Technology 1,Y,Photography/Lens Media
+Art / Visual Arts,Grades 9-12,0107450,VISUAL TECH 2,Visual Technology 2,Y,Photography/Lens Media
+Art / Visual Arts,Grades 9-12,0107460,VISUAL TECH 3 HON,Visual Technology 3 Honors,Y,Photography/Lens Media
+Art / Visual Arts,Grades 9-12,0107470,IB FILM STUDIES 1,International Baccalaureate Film Studies 1,Y,IB Film
+Art / Visual Arts,Grades 9-12,0107472,IB FILM STUDIES 2,International Baccalaureate Film Studies 2,Y,IB Film
+Art / Visual Arts,Grades 9-12,0107474,IB FILM STUDIES 3,International Baccalaureate Film Studies 3,Y,IB Film
+Art / Visual Arts,Grades 9-12,0107480,AICE ART&DES F&V AS,Cambridge AICE Art & Design: Film & Video AS Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0108310,CREATIVE PHOTO 1,Creative Photography 1,Y,Level 2
+Art / Visual Arts,Grades 9-12,0108320,CREATIVE PHOTO 2,Creative Photography 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0108330,CREATIVE PHOTO 3 HON,Creative Photography 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0108355,PRE-AICE PHOTO IGCSE,"Cambridge Pre-AICE Photography, Digital & Lens Media IGCSE Level",Y,Cambridge IGCSE Level
+Art / Visual Arts,Grades 9-12,0108360,AICE ART&DESPHOTO AS,Cambridge AICE Art & Design: Photography AS Level,Y,Cambridge Advanced Level
+Art / Visual Arts,Grades 9-12,0109310,PORT DEV: DRAW HON,Portfolio Development: Drawing Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0109320,PORT DEV: 2D DES HON,Portfolio Development: Two-Dimensional Design Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0109330,PORT DEV: 3D DES HON,Portfolio Development: Three-Dimensional Design Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0109350,AP 2-D ART & DESIGN,Advanced Placement Two-Dimensional Art & Design,Y,AP Studio Art
+Art / Visual Arts,Grades 9-12,0109360,AP 3-D ART & DESIGN,Advanced Placement Three-Dimensional Art & Design,Y,AP Studio Art
+Art / Visual Arts,Grades 9-12,0110300,PRINTMG 1,Printmaking 1,Y,Level 2
+Art / Visual Arts,Grades 9-12,0111310,SCULPT 1,Sculpture 1,Y,Level 2
+Art / Visual Arts,Grades 9-12,0111320,SCULPT 2,Sculpture 2,Y,Level 2
+Art / Visual Arts,Grades 9-12,0111330,SCULPT 3 HON,Sculpture 3 Honors,Y,Level 3 Honors
+Art / Visual Arts,Grades 9-12,0114800,FL PRE-IB ART 1,Florida's Preinternational Baccalaureate Art 1,Y,Pre-IB
+Art / Visual Arts,Grades 9-12,0114810,FL PRE-IB ART 2,Florida's Preinternational Baccalaureate Art 2,Y,Pre-IB
+Art / Visual Arts,Grades 9-12,0114815,IB VISUAL ARTS 1,International Baccalaureate Visual Arts 1,Y,IB Diploma Programme
+Art / Visual Arts,Grades 9-12,0114825,IB VISUAL ARTS 2,International Baccalaureate Visual Arts 2,Y,IB Diploma Programme
+Art / Visual Arts,Grades 9-12,0114835,IB VISUAL ARTS 3,International Baccalaureate Visual Arts 3,Y,IB Diploma Programme
+Art / Visual Arts,Grades 9-12,0114880,IB MYP ART 1,International Baccalaureate Mid Yrs Prog Art 1,Y,IB Middle Years Programme
+Art / Visual Arts,Grades 9-12,0114890,IB MYP ART 2,International Baccalaureate Mid Yrs Prog Art 2,Y,IB Middle Years Programme
+Art / Visual Arts,Grades 9-12,0114900,PRE-AP VISUAL ARTS,Pre-Advanced Placement Visual Arts,Y,College Board Pre-AP
+Art / Visual Arts,Grades 9-12,0100990,ART TRANSFER,Art Transfer,Z,Transfer credit code
+Dance,Pre-K to 5,5003010,DANCE GRADE K,Dance Grade Kindergarten,Y,Elementary dance core
+Dance,Pre-K to 5,5003020,DANCE GRADE 1,Dance Grade 1,Y,Elementary dance core
+Dance,Pre-K to 5,5003030,DANCE GRADE 2,Dance Grade 2,Y,Elementary dance core
+Dance,Pre-K to 5,5003040,DANCE INTERM 1,Dance Intermediate 1,Y,Elementary dance core
+Dance,Pre-K to 5,5003050,DANCE INTERM 2,Dance Intermediate 2,Y,Elementary dance core
+Dance,Pre-K to 5,5003060,DANCE INTERM 3,Dance Intermediate 3,Y,Elementary dance core
+Dance,Grades 6-8,0300000,M/J DANCE 1,M/J Dance 1,Y,Middle school dance core
+Dance,Grades 6-8,0300010,M/J DANCE 2,M/J Dance 2,Y,Middle school dance core
+Dance,Grades 6-8,0300020,M/J DANCE 3,M/J Dance 3,Y,Middle school dance core
+Dance,Grades 6-8,0300025,M/J DANCE 3 CAR PLAN,M/J Dance 3 and Career Planning,Y,Includes career planning
+Dance,Grades 6-8,0300030,M/J DANCE 4,M/J Dance 4,Y,Middle school dance core
+Dance,Grades 6-8,0300090,M/J DANCE MIX MOBIL,M/J Dance Celebration for Students of Mixed Mobilities,Y,Adaptive / inclusive dance
+Dance,Grades 6-8,0300100,M/J INTRO DANCE TECH,M/J Introduction to Dance Techniques (MC),M,Multi-credit course
+Dance,Grades 6-8,0300220,M/J DANCE TRANSFER,M/J Dance Transfer,Z,Transfer credit code
+Dance,Grades 9-12,0300300,WORLD DANCE,World Dance,Y,Level 2
+Dance,Grades 9-12,0300305,INTRO TO DANCE,Introduction to Dance,S,Level 2
+Dance,Grades 9-12,0300310,DANCE TECHNQS 1,Dance Techniques 1,Y,Level 2
+Dance,Grades 9-12,0300320,DANCE TECHNQS 2,Dance Techniques 2,Y,Level 2
+Dance,Grades 9-12,0300330,DANCE TECHNQS 3 HON,Dance Techniques 3 Honors,Y,Level 3 Honors
+Dance,Grades 9-12,0300334,DANCE TECHNQS 4 HON,Dance Techniques 4 Honors,Y,Level 3 Honors
+Dance,Grades 9-12,0300338,DANCE MIX MOBIL,Dance Celebration for Students of Mixed Mobilities,Y,Level 2
+Dance,Grades 9-12,0300340,BALLET 1,Bal Ballet 1,Y,Level 2
+Dance,Grades 9-12,0300350,BALLET 2,Ballet 2,Y,Level 2
+Dance,Grades 9-12,0300360,BALLET 3,Ballet 3,Y,Level 2
+Dance,Grades 9-12,0300370,BALLET 4 HON,Ballet 4 Honors,Y,Level 3 Honors
+Dance,Grades 9-12,0300380,DANCE CHOR PERF 1,Dance Choreography/Performance 1,Y,Level 2
+Dance,Grades 9-12,0300390,DANCE CHOR PERF 2 H,Dance Choreography/Performance 2 Honors,Y,Level 3 Honors
+Dance,Grades 9-12,0300400,DANCE REPERT 1,Dance Repertory 1,Y,Level 2
+Dance,Grades 9-12,0300410,DANCE REPERT 2,Dance Repertory 2,Y,Level 2
+Dance,Grades 9-12,0300420,DANCE REPERT 3 HON,Dance Repertory 3 Honors,Y,Level 3 Honors
+Dance,Grades 9-12,0300430,DANCE REPERT 4 HON,Dance Repertory 4 Honors,Y,Level 3 Honors
+Dance,Grades 9-12,0300450,DANCE HIST/AESTH 1,Dance History and Aesthetics 1,Y,Level 2
+Dance,Grades 9-12,0300480,DANCE KINE/SOMAT 1,Dance Kinesiology and Somatics 1,Y,Level 2
+Dance,Grades 9-12,0300650,FL PRE-IB DANCE,Florida's Preinternational Baccalaureate Dance,Y,Pre-IB
+Dance,Grades 9-12,0300655,IB DANCE 1,International Baccalaureate Dance 1,Y,IB Diploma Programme
+Dance,Grades 9-12,0300660,IB DANCE 2,International Baccalaureate Dance 2,Y,IB Diploma Programme
+Dance,Grades 9-12,0300670,IB DANCE 3,International Baccalaureate Dance 3,Y,IB Diploma Programme
+Dance,Grades 9-12,0300700,PRE-AP DANCE,Pre-Advanced Placement Dance,Y,College Board Pre-AP
+Dance,Grades 9-12,0300990,DANCE TRANSFER,Dance Transfer,Z,Transfer credit code
+Dance,Grades 9-12,1500445,DANCE WAIVER,Dance Waiver,Z,Administrative waiver code
+Drama / Theatre Arts,Pre-K to 5,5004200,THEATRE GRADE K,Theatre Grade Kindergarten,Y,Elementary theatre core
+Drama / Theatre Arts,Pre-K to 5,5004210,THEATRE GRADE 1,Theatre Grade 1,Y,Elementary theatre core
+Drama / Theatre Arts,Pre-K to 5,5004220,THEATRE GRADE 2,Theatre Grade 2,Y,Elementary theatre core
+Drama / Theatre Arts,Pre-K to 5,5004230,THEATRE-INTERM 1,Theatre Intermediate 1,Y,Elementary theatre core
+Drama / Theatre Arts,Pre-K to 5,5004240,THEATRE-INTERM 2,Theatre Intermediate 2,Y,Elementary theatre core
+Drama / Theatre Arts,Pre-K to 5,5004250,THEATRE-INTERM 3,Theatre Intermediate 3,Y,Elementary theatre core
+Drama / Theatre Arts,Grades 6-8,0400000,M/J THEATRE 1,M/J Theatre 1,Y,Middle school theatre core
+Drama / Theatre Arts,Grades 6-8,0400010,M/J THEATRE 2,M/J Theatre 2,Y,Middle school theatre core
+Drama / Theatre Arts,Grades 6-8,0400020,M/J THEATRE 3,M/J Theatre 3,Y,Middle school theatre core
+Drama / Theatre Arts,Grades 6-8,0400025,M/J THEATRE 3 C/P,M/J Theatre 3 and Career Planning,Y,Includes career planning
+Drama / Theatre Arts,Grades 6-8,0400030,M/J THEATRE 4,M/J Theatre 4,Y,Middle school theatre core
+Drama / Theatre Arts,Grades 6-8,0400035,M/J BASIC THEATRE,M/J Basic Theatre (MC),M,Multi-credit course
+Drama / Theatre Arts,Grades 6-8,0400040,M/J ACTING 1,M/J Acting 1,S,Middle school acting
+Drama / Theatre Arts,Grades 6-8,0400045,M/J ACTING 2,M/J Acting 2,S,Middle school acting
+Drama / Theatre Arts,Grades 6-8,0400100,M/J INTRO TECH THEA,M/J Introduction to Technical Theatre,S,Technical theatre
+Drama / Theatre Arts,Grades 6-8,0400110,M/J TECH THEA DE&PR,M/J Technical Theatre: Design and Production,Y,Technical theatre
+Drama / Theatre Arts,Grades 6-8,0400200,M/J MUSICAL THEAT 1,M/J Musical Theatre 1,Y,Musical theatre
+Drama / Theatre Arts,Grades 6-8,0400205,M/J MUSICAL THEAT 2,M/J Musical Theatre 2,Y,Musical theatre
+Drama / Theatre Arts,Grades 6-8,0400210,M/J MUSICAL THEAT 3,M/J Musical Theatre 3,Y,Musical theatre
+Drama / Theatre Arts,Grades 6-8,0400220,M/J DRAMA TRANSFER,M/J Drama Transfer,Z,Transfer credit code
+Drama / Theatre Arts,Grades 9-12,0400300,INTROD DRAMA,Introduction to Drama,S,Level 2
+Drama / Theatre Arts,Grades 9-12,0400310,THEATRE 1,Theatre 1,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400320,THEATRE 2,Theatre 2,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400330,THEATRE 3 HON,Theatre 3 Honors,Y,Level 3 Honors
+Drama / Theatre Arts,Grades 9-12,0400340,THEATRE 4 HON,Theatre 4 Honors,Y,Level 3 Honors
+Drama / Theatre Arts,Grades 9-12,0400345,PRE-AICE DRAMA IG,Cambridge Pre-AICE Drama IGCSE Level,Y,Cambridge IGCSE Level
+Drama / Theatre Arts,Grades 9-12,0400346,AICE DRAMA 1 AS LEV,Cambridge AICE Drama 1 AS Level,Y,Cambridge Advanced Level
+Drama / Theatre Arts,Grades 9-12,0400347,AICE DRAMA 2 A LEVEL,Cambridge AICE Drama 2 A Level,Y,Cambridge Advanced Level
+Drama / Theatre Arts,Grades 9-12,0400350,THEA HIST LIT 1,Theatre History and Literature 1,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400360,THEA HIST LIT 2 HON,Theatre History and Literature 2 Honors,Y,Level 3 Honors
+Drama / Theatre Arts,Grades 9-12,0400370,ACTING 1,Acting 1,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400380,ACTING 2,Acting 2,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400390,ACTING 3,Acting 3,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400400,ACTING 4 HON,Acting 4 Honors,Y,Level 3 Honors
+Drama / Theatre Arts,Grades 9-12,0400405,IB MYP DRAMA 1,International Baccalaureate Mid Yrs Prog Drama 1,Y,IB Middle Years Programme
+Drama / Theatre Arts,Grades 9-12,0400406,IB MYP DRAMA 2,International Baccalaureate Mid Yrs Prog Drama 2,Y,IB Middle Years Programme
+Drama / Theatre Arts,Grades 9-12,0400407,TECH THE D/P SCEN PR,Technical Theatre: Design & Production for Scenery & Props,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400409,TECH THE D/P CMH,"Technical Theatre: Design & Production for Costume, Makeup, & Hair",Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400410,TECH THEA DES&PROD 1,Technical Theatre: Design & Production 1,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400420,TECH THEA DES&PROD 2,Technical Theatre: Design & Production 2,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400430,TECH THEA DES&PROD 3,Technical Theatre: Design & Production 3,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400440,TECH THEA DES&PROD4H,Technical Theatre: Design & Production 4 Honors,Y,Level 3 Honors
+Drama / Theatre Arts,Grades 9-12,0400500,THEA DIR & ST MAN 1,Theatrical Direction & Stage Management 1,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400510,THEA DIR & ST MAN 2H,Theatrical Direction & Stage Management 2 Honors,Y,Level 3 Honors
+Drama / Theatre Arts,Grades 9-12,0400540,VOICE & DICTION,Voice and Diction,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400620,THEATRE IMPROV,Theatre Improvisation,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400660,THEA CIN & FILM PROD,"Theatre, Cinema, & Film Production",Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400700,MUSIC THEATRE 1,Musical Theatre 1,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400710,MUSIC THEATRE 2,Musical Theatre 2,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400720,MUSIC THEATRE 3,Musical Theatre 3,Y,Level 2
+Drama / Theatre Arts,Grades 9-12,0400750,PRE-AP THEATRE,Pre-Advanced Placement Theatre,Y,College Board Pre-AP
+Drama / Theatre Arts,Grades 9-12,0400800,FL PRE-IB THEATRE 1,Florida's Pre-International Baccalaureate Theatre 1,Y,Pre-IB
+Drama / Theatre Arts,Grades 9-12,0400805,FL PRE-IB THEATRE 2,Florida's Pre-International Baccalaureate Theatre 2,Y,Pre-IB
+Drama / Theatre Arts,Grades 9-12,0400810,IB THEATRE 1,International Baccalaureate Theatre 1,Y,IB Diploma Programme
+Drama / Theatre Arts,Grades 9-12,0400820,IB THEATRE 2,International Baccalaureate Theatre 2,Y,IB Diploma Programme
+Drama / Theatre Arts,Grades 9-12,0400830,IB THEATRE 3,International Baccalaureate Theatre 3,Y,IB Diploma Programme
+Drama / Theatre Arts,Grades 9-12,0400990,DRAMA TRANSFER,Drama Transfer,Z,Transfer credit code
+Drama / Theatre Arts,Grades 9-12,1009350,PLAY WRIT,Playwriting,Y,Located in English section; meets Performing Fine Arts requirement (PF)
+Music Education,Pre-K to 5,5013010,ELEM CHORUS,Elementary Chorus,Y,Choral music
+Music Education,Pre-K to 5,5013020,ELEM BAND,Elementary Band,Y,Instrumental band
+Music Education,Pre-K to 5,5013030,ELEM ORCHESTRA,Elementary Orchestra,Y,Instrumental orchestra
+Music Education,Pre-K to 5,5013035,ELEM SPEC ENS,Elementary Special Ensemble,Y,Ensemble
+Music Education,Pre-K to 5,5013060,MUSIC GRADE K,Music Grade Kindergarten,Y,Elementary general music
+Music Education,Pre-K to 5,5013070,MUSIC GRADE 1,Music Grade 1,Y,Elementary general music
+Music Education,Pre-K to 5,5013080,MUSIC GRADE 2,Music Grade 2,Y,Elementary general music
+Music Education,Pre-K to 5,5013090,MUSIC-INTERM 1,Music Intermediate 1,Y,Elementary general music
+Music Education,Pre-K to 5,5013100,MUSIC-INTERM 2,Music Intermediate 2,Y,Elementary general music
+Music Education,Pre-K to 5,5013110,MUSIC-INTERM 3,Music Intermediate 3,Y,Elementary general music
+Music Education,Pre-K to 5,5013200,PRIMARY MUSIC GR K,Cambridge Primary Music Grade Kindergarten,Y,Cambridge Primary
+Music Education,Pre-K to 5,5013205,PRIMARY MUSIC GR 1,Cambridge Primary Music Grade 1,Y,Cambridge Primary
+Music Education,Pre-K to 5,5013210,PRIMARY MUSIC GR 2,Cambridge Primary Music Grade 2,Y,Cambridge Primary
+Music Education,Pre-K to 5,5013215,PRIMARY MUSIC GR 3,Cambridge Primary Music Grade 3,Y,Cambridge Primary
+Music Education,Pre-K to 5,5013220,PRIMARY MUSIC GR 4,Cambridge Primary Music Grade 4,Y,Cambridge Primary
+Music Education,Pre-K to 5,5013225,PRIMARY MUSIC GR 5,Cambridge Primary Music Grade 5,Y,Cambridge Primary
+Music Education,Grades 6-8,1300000,M/J MUS THEORY 1,M/J Music Theory 1,Y,General Music
+Music Education,Grades 6-8,1300010,M/J MUS THEORY 2,M/J Music Theory 2,Y,General Music
+Music Education,Grades 6-8,1300025,M/J BASIC MUS THEORY,M/J Basic Music Theory,S,General Music
+Music Education,Grades 6-8,1300030,M/J UNDERSTAND MUSIC,M/J Understanding Music,S,General Music
+Music Education,Grades 6-8,1300080,M/J EXPL MUS PERF,M/J Exploring Music Performance,S,General Music
+Music Education,Grades 6-8,1301090,M/J EXPL MUSIC 1,M/J Exploring Music 1,Y,General Music
+Music Education,Grades 6-8,1301100,M/J EXPL MUSIC 2,M/J Exploring Music 2,Y,General Music
+Music Education,Grades 6-8,1301110,M/J EXPL MUSIC 3,M/J Exploring Music 3,Y,General Music
+Music Education,Grades 6-8,1303200,M/J MUSIC ENS 1,M/J Music Ensemble 1,Y,Ensemble
+Music Education,Grades 6-8,1303210,M/J MUSIC ENS 2,M/J Music Ensemble 2,Y,Corrected: Code printed as 1303210M in PDF
+Music Education,Grades 6-8,1303220,M/J MUSIC ENS 3,M/J Music Ensemble 3,Y,Ensemble
+Music Education,Grades 6-8,1303230,M/J MUSIC TECNQS 1,M/J Music Techniques 1,Y,Music Techniques
+Music Education,Grades 6-8,1303250,M/J MUSIC 1 CLS,M/J Music 1 Cambridge Lower Secondary,S,Cambridge Lower Secondary
+Music Education,Grades 6-8,1303255,M/J MUSIC 2 CLS,M/J Music 2 Cambridge Lower Secondary,S,Cambridge Lower Secondary
+Music Education,Grades 6-8,1303260,M/J MUSIC 3 CLS,M/J Music 3 Cambridge Lower Secondary,S,Cambridge Lower Secondary
+Music Education,Grades 6-8,1301030,M/J KEYBD 1,M/J Keyboard 1,Y,Instrumental Keyboard
+Music Education,Grades 6-8,1301040,M/J KEYBD 2,M/J Keyboard 2,Y,Instrumental Keyboard
+Music Education,Grades 6-8,1301050,M/J KEYBD 3,M/J Keyboard 3,Y,Instrumental Keyboard
+Music Education,Grades 6-8,1301060,M/J GUITAR 1,M/J Guitar 1,Y,Instrumental Guitar
+Music Education,Grades 6-8,1301070,M/J GUITAR 2,M/J Guitar 2,Y,Instrumental Guitar
+Music Education,Grades 6-8,1301080,M/J GUITAR 3,M/J Guitar 3,Y,Instrumental Guitar
+Music Education,Grades 6-8,1302000,M/J BAND 1,M/J Band 1,Y,Instrumental Band
+Music Education,Grades 6-8,1302010,M/J BAND 2,M/J Band 2,Y,Instrumental Band
+Music Education,Grades 6-8,1302020,M/J BAND 3,M/J Band 3,Y,Instrumental Band
+Music Education,Grades 6-8,1302030,M/J BAND 4,M/J Band 4,Y,Instrumental Band
+Music Education,Grades 6-8,1302040,M/J ORCH 1,M/J Orchestra 1,Y,Instrumental Orchestra
+Music Education,Grades 6-8,1302050,M/J ORCH 2,M/J Orchestra 2,Y,Instrumental Orchestra
+Music Education,Grades 6-8,1302060,M/J ORCH 3,M/J Orchestra 3,Y,Instrumental Orchestra
+Music Education,Grades 6-8,1302070,M/J ORCH 4,M/J Orchestra 4,Y,Instrumental Orchestra
+Music Education,Grades 6-8,1302080,M/J INSTRU TECNQS 1,M/J Instrumental Techniques 1,Y,Instrumental Techniques
+Music Education,Grades 6-8,1302090,M/J INSTRU TECNQS 2,M/J Instrumental Techniques 2,Y,Instrumental Techniques
+Music Education,Grades 6-8,1302100,M/J INSTRU TECNQS 3,M/J Instrumental Techniques 3,Y,Instrumental Techniques
+Music Education,Grades 6-8,1302110,M/J INSTRU ENS 1,M/J Instrumental Ensemble 1,Y,Instrumental Ensemble
+Music Education,Grades 6-8,1302120,M/J INSTRU ENS 2,M/J Instrumental Ensemble 2,Y,Instrumental Ensemble
+Music Education,Grades 6-8,1302130,M/J INSTRU ENS 3,M/J Instrumental Ensemble 3,Y,Instrumental Ensemble
+Music Education,Grades 6-8,1302140,M/J BAND 2&CAR PLAN,M/J Band 2 and Career Planning,Y,Includes career component
+Music Education,Grades 6-8,1302142,M/J BAND 3&CAR PLAN,M/J Band 3 and Career Planning,Y,Includes career component
+Music Education,Grades 6-8,1303000,M/J CHORUS 1,M/J Chorus 1,Y,Choral Music
+Music Education,Grades 6-8,1303010,M/J CHORUS 2,M/J Chorus 2,Y,Choral Music
+Music Education,Grades 6-8,1303020,M/J CHORUS 3,M/J Chorus 3,Y,Choral Music
+Music Education,Grades 6-8,1303030,M/J CHORUS 4,M/J Chorus 4,Y,Choral Music
+Music Education,Grades 6-8,1303070,M/J VOCAL TECNQS 1,M/J Vocal Techniques 1,Y,Vocal Techniques
+Music Education,Grades 6-8,1303080,M/J VOCAL TECNQS 2,M/J Vocal Techniques 2,Y,Vocal Techniques
+Music Education,Grades 6-8,1303100,M/J VOCAL ENS 1,M/J Vocal Ensemble 1,Y,Vocal Ensemble
+Music Education,Grades 6-8,1303110,M/J VOCAL ENS 2,M/J Vocal Ensemble 2,Y,Vocal Ensemble
+Music Education,Grades 6-8,1303120,M/J VOCAL ENS 3,M/J Vocal Ensemble 3,Y,Vocal Ensemble
+Music Education,Grades 6-8,1300220,M/J MUSIC TRANSFER,M/J Music Transfer,Z,Transfer credit code
+Music Education,Grades 9-12,1300300,MUS THEORY 1,Music Theory 1,Y,General Music
+Music Education,Grades 9-12,1300305,FUNDAMENTAL MUSIC TH,Fundamentals of Music Theory,S,General Music
+Music Education,Grades 9-12,1300310,MUS THEORY 2 HON,Music Theory 2 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1300320,PRE-AP MUSIC,Pre-Advanced Placement Music,Y,College Board Pre-AP
+Music Education,Grades 9-12,1300330,AP MUS THEORY,Advanced Placement Music Theory,Y,College Board AP
+Music Education,Grades 9-12,1300340,MUSIC WORLD,Music of the World,Y,General Music
+Music Education,Grades 9-12,1300395,AICE MUSIC 1 AS,Cambridge AICE Music 1 AS Level,Y,Cambridge Advanced Level
+Music Education,Grades 9-12,1300396,AICE MUSIC 2 AS,Cambridge AICE Music 2 AS Level,Y,Cambridge Advanced Level
+Music Education,Grades 9-12,1300397,AICE MUSIC 3 AL,Cambridge AICE Music 3 A Level,Y,Cambridge Advanced Level
+Music Education,Grades 9-12,1300800,FL PRE-IB MUSIC 1,Florida's Preinternational Baccalaureate Music 1,Y,Pre-IB
+Music Education,Grades 9-12,1300810,FL PRE-IB MUSIC 2,Florida's Preinternational Baccalaureate Music 2,Y,Pre-IB
+Music Education,Grades 9-12,1300816,IB MUSIC 1,International Baccalaureate Music 1,Y,IB Diploma Programme
+Music Education,Grades 9-12,1300818,IB MUSIC 2,International Baccalaureate Music 2,Y,IB Diploma Programme
+Music Education,Grades 9-12,1300820,IB MUSIC 3,International Baccalaureate Music 3,Y,IB Diploma Programme
+Music Education,Grades 9-12,1300840,IB MYP MUSIC 1,International Baccalaureate Mid Yrs Prog Music 1,Y,IB Middle Years Programme
+Music Education,Grades 9-12,1300850,IB MYP MUSIC 2,International Baccalaureate Mid Yrs Prog Music 2,Y,IB Middle Years Programme
+Music Education,Grades 9-12,1305400,MUSIC ENS 1,Music Ensemble 1,Y,Instrumental/Vocal Ensemble
+Music Education,Grades 9-12,1305410,MUSIC ENS 2,Music Ensemble 2,Y,Instrumental/Vocal Ensemble
+Music Education,Grades 9-12,1305420,MUSIC ENS 3,Music Ensemble 3,Y,Instrumental/Vocal Ensemble
+Music Education,Grades 9-12,1305430,MUSIC ENS 4 HON,Music Ensemble 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1305500,MUSIC TECNQS 1,Music Techniques 1,Y,General Music
+Music Education,Grades 9-12,1301320,GUITAR 1,Guitar 1,Y,Instrumental Guitar
+Music Education,Grades 9-12,1301330,GUITAR 2,Guitar 2,Y,Instrumental Guitar
+Music Education,Grades 9-12,1301340,GUITAR 3,Guitar 3,Y,Instrumental Guitar
+Music Education,Grades 9-12,1301350,GUITAR 4 HONORS,Guitar 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1301360,KEYBD 1,Keyboard 1,Y,Instrumental Keyboard
+Music Education,Grades 9-12,1301370,KEYBD 2,Keyboard 2,Y,Instrumental Keyboard
+Music Education,Grades 9-12,1301380,KEYBD 3,Keyboard 3,Y,Instrumental Keyboard
+Music Education,Grades 9-12,1301390,KEYBD 4 HONORS,Keyboard 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1302300,BAND 1,Band 1,Y,Instrumental Band
+Music Education,Grades 9-12,1302310,BAND 2,Band 2,Y,Instrumental Band
+Music Education,Grades 9-12,1302320,BAND 3,Band 3,Y,Instrumental Band
+Music Education,Grades 9-12,1302330,BAND 4,Band 4,Y,Instrumental Band
+Music Education,Grades 9-12,1302340,BAND 5 HON,Band 5 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1302350,BAND 6 HON,Band 6 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1302355,MARCHING BAND,Marching Band,M,Multi-credit course
+Music Education,Grades 9-12,1302360,ORCH 1,Orchestra 1,Y,Instrumental Orchestra
+Music Education,Grades 9-12,1302365,FUNDMNTL ORCHESTRA,Fundamentals of Orchestra,S,Instrumental Orchestra
+Music Education,Grades 9-12,1302370,ORCH 2,Orchestra 2,Y,Instrumental Orchestra
+Music Education,Grades 9-12,1302380,ORCH 3,Orchestra 3,Y,Instrumental Orchestra
+Music Education,Grades 9-12,1302390,ORCH 4,Orchestra 4,Y,Instrumental Orchestra
+Music Education,Grades 9-12,1302400,ORCH 5 HON,Orchestra 5 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1302410,ORCH 6 HON,Orchestra 6 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1302420,INSTRU TECNQS 1,Instrumental Techniques 1,Y,Instrumental Techniques
+Music Education,Grades 9-12,1302430,INSTRU TECNQS 2,Instrumental Techniques 2,Y,Instrumental Techniques
+Music Education,Grades 9-12,1302440,INSTRU TECNQS 3,Instrumental Techniques 3,Y,Instrumental Techniques
+Music Education,Grades 9-12,1302450,INSTRU TECNQS 4 HON,Instrumental Techniques 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1302460,INSTRU ENS 1,Instrumental Ensemble 1,Y,Instrumental Ensemble
+Music Education,Grades 9-12,1302470,INSTRU ENS 2,Instrumental Ensemble 2,Y,Instrumental Ensemble
+Music Education,Grades 9-12,1302480,INSTRU ENS 3,Instrumental Ensemble 3,Y,Instrumental Ensemble
+Music Education,Grades 9-12,1302490,INSTRU ENS 4 HON,Instrumental Ensemble 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1302500,JAZZ ENS 1,Jazz Ensemble 1,Y,Jazz Ensemble
+Music Education,Grades 9-12,1302510,JAZZ ENS 2,Jazz Ensemble 2,Y,Jazz Ensemble
+Music Education,Grades 9-12,1302520,JAZZ ENS 3,Jazz Ensemble 3,Y,Jazz Ensemble
+Music Education,Grades 9-12,1302530,JAZZ ENS 4 HON,Jazz Ensemble 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1303300,CHORUS 1,Chorus 1,Y,Choral Music
+Music Education,Grades 9-12,1303305,FUNDAMENTALS CHORUS,Fundamentals of Chorus,S,Choral Music
+Music Education,Grades 9-12,1303310,CHORUS 2,Chorus 2,Y,Choral Music
+Music Education,Grades 9-12,1303320,CHORUS 3,Chorus 3,Y,Choral Music
+Music Education,Grades 9-12,1303330,CHORUS 4,Chorus 4,Y,Choral Music
+Music Education,Grades 9-12,1303340,CHORUS 5 HON,Chorus 5 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1303350,CHORUS 6 HON,Chorus 6 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1303360,CHORUS REG-SPEC 1,Chorus Register-Specific 1,Y,Choral Music
+Music Education,Grades 9-12,1303370,CHORUS REG-SPEC 2,Chorus Register-Specific 2,Y,Choral Music
+Music Education,Grades 9-12,1303380,CHORUS REG-SPEC 3,Chorus Register-Specific 3,Y,Choral Music
+Music Education,Grades 9-12,1303390,CHORUS REG-SPEC 4 H,Chorus Register-Specific 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1303400,VOCAL TECNQS 1,Vocal Techniques 1,Y,Vocal Techniques
+Music Education,Grades 9-12,1303410,VOCAL TECNQS 2,Vocal Techniques 2,Y,Vocal Techniques
+Music Education,Grades 9-12,1303420,VOCAL TECNQS 3,Vocal Techniques 3,Y,Vocal Techniques
+Music Education,Grades 9-12,1303430,VOCAL TECNQS 4 HON,Vocal Techniques 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1303440,VOCAL ENS 1,Vocal Ensemble 1,Y,Vocal Ensemble
+Music Education,Grades 9-12,1303450,VOCAL ENS 2,Vocal Ensemble 2,Y,Vocal Ensemble
+Music Education,Grades 9-12,1303460,VOCAL ENS 3,Vocal Ensemble 3,Y,Vocal Ensemble
+Music Education,Grades 9-12,1303470,VOCAL ENS 4 HON,Vocal Ensemble 4 Honors,Y,Level 3 Honors
+Music Education,Grades 9-12,1305300,EURHY 1,Eurhythmics 1,Y,Flag: Movement/Color Guard under Music
+Music Education,Grades 9-12,1305310,EURHY 2,Eurhythmics 2,Y,Flag: Movement/Color Guard under Music
+Music Education,Grades 9-12,1305320,EURHY 3,Eurhythmics 3,Y,Flag: Movement/Color Guard under Music
+Music Education,Grades 9-12,1305330,EURHY 4,Eurhythmics 4,Y,Flag: Movement/Color Guard under Music
+Music Education,Grades 9-12,1300990,MUSIC TRANSFER,Music Transfer,Z,Transfer credit code
+Music Education,Grades 9-12,1500440,MCHG BAND WAIVER SEM,Marching Band Physical Education Waiver Completion of Semester,Z,Administrative waiver code
+Music Education,Grades 9-12,1500441,MCHG BAND WAIVER YR1,Marching Band Physical Education and Performing Arts Waiver Completion of Year 1,Z,Administrative waiver code
+Music Education,Grades 9-12,1500442,MCHG BAND WAIVER YR2,Marching Band Physical Education and Performing Arts Waiver Completion of Year 2,Z,Administrative waiver code
+Sound or Audio,Grades 6-8,1303150,M/J MUSIC TECH,M/J Music Technology,Y,Music Tech / Audio
+Sound or Audio,Grades 9-12,1304300,MUS TECH & SO ENG 1,Music Technology and Sound Engineering 1,Y,Audio Recording / Sound Engineering
+Sound or Audio,Grades 9-12,1304310,MUS TECH & SO ENG 2,Music Technology and Sound Engineering 2,Y,Audio Recording / Sound Engineering
+Sound or Audio,CTE Courses,8772310,DIGITAL AUDIO PROD 1,Digital Audio Production 1/Level 2,Y,High School CTE Audio Track
+Sound or Audio,CTE Courses,8772320,DIGITAL AUDIO PROD 2,Digital Audio Production 2/Level 2,Y,High School CTE Audio Track
+Sound or Audio,CTE Courses,8772330,DIGITAL AUDIO PROD 3,Digital Audio Production 3/Level 2,Y,High School CTE Audio Track
+Sound or Audio,CTE Courses,8772340,DIGITAL AUDIO PROD 4,Digital Audio Production 4/Level 2,Y,High School CTE Audio Track
+Sound or Audio,CTE Courses,8772350,DIGITAL AUDIO PROD 5,Digital Audio Production 5/Level 2,Y,High School CTE Audio Track
+Sound or Audio,CTE Courses,8772360,DIGITAL AUDIO PROD 6,Digital Audio Production 6/Level 2,Y,Corrected: Code printed as 88772360 in PDF
+Sound or Audio,CTE Courses,8772370,DIGITAL AUDIO PROD 7,Digital Audio Production 7/Level 2,Y,High School CTE Audio Track
