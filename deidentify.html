@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>De-identify Enrollment Export | SDOC Arts Data</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./vendor/xlsx.mini.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="eyebrow">SDOC FINE & PERFORMING ARTS</span>
+    <h1>De-identify Enrollment Export</h1>
+    <p>Create stable anonymous student keys locally in your browser before a district enrollment file enters the canonical importer.</p>
+    <nav class="topnav">
+      <a class="active" href="./deidentify.html">De-identify</a>
+      <a href="./">Import & Reconciliation</a>
+      <a href="./pathways.html">Pathway Dictionary</a>
+      <a href="./golden.html">Golden Import Summary</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="privacy card">
+    <strong>Raw student data stays local</strong>
+    <p>Do not upload the raw district export to ChatGPT, GitHub, or any other AI tool. This page processes the file in your browser and does not send the file or de-identification key to the server.</p>
+    <span class="pill">Stable keyed anonymization · HMAC-SHA-256</span>
+  </section>
+
+  <section class="card">
+    <div class="step">1</div>
+    <h2>De-identification key</h2>
+    <p>Generate this once, save it in district-approved protected storage, and reuse the same key for every school year. The key itself is sensitive.</p>
+    <div class="actions">
+      <button id="generateKey" class="primary">Generate new key</button>
+      <label class="file-inline">Load existing key <input id="keyFile" type="file" accept=".json,application/json"></label>
+      <a id="keyDownload" class="source-link" hidden>Download key file</a>
+    </div>
+    <div id="keyStatus" class="status info">No key is loaded. Do not process a real district file until the key is safely backed up.</div>
+  </section>
+
+  <section class="card">
+    <div class="step">2</div>
+    <h2>Choose raw enrollment export</h2>
+    <p>CSV, TSV, and XLSX are supported. The raw file is read locally and is not saved by this page.</p>
+    <input id="sourceFile" type="file" accept=".csv,.tsv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+    <div id="fileStatus" class="status info">Choose the real district export only after the de-identification key is loaded.</div>
+  </section>
+
+  <section id="configCard" class="card" hidden>
+    <div class="step">3</div>
+    <h2>Review identifiers</h2>
+    <div class="toolbar">
+      <label>Source Student ID column
+        <select id="idColumn"></select>
+      </label>
+    </div>
+    <h3>Columns to remove</h3>
+    <p>Potential direct identifiers are preselected. Review every column and remove any student-identifying field that is not needed for arts analysis.</p>
+    <div id="columnReview" class="column-review"></div>
+    <label class="confirm-line"><input id="reviewConfirm" type="checkbox"> I reviewed the columns and confirmed that direct student identifiers other than the source Student ID will be removed before export.</label>
+    <div class="actions"><button id="processBtn" class="primary">Create de-identified export</button></div>
+  </section>
+
+  <section id="resultCard" class="card" hidden>
+    <div class="step">4</div>
+    <h2>De-identified result</h2>
+    <div id="resultMetrics" class="metrics"></div>
+    <div id="resultStatus" class="status info"></div>
+    <div class="actions"><a id="csvDownload" class="source-link" hidden>Download de-identified CSV</a></div>
+    <p class="muted">The exported file uses <code>Anonymous Student ID</code> values beginning with <code>ANON-</code>. It can now be used in the canonical importer. Keep the original raw export and the de-identification key in separate approved protected storage.</p>
+  </section>
+</main>
+<footer>Canonical source: <code>clb1015/district-arts-dashboard</code></footer>
+<script type="module" src="./deidentify.js"></script>
+</body>
+</html>
