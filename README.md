@@ -83,3 +83,16 @@ The intake owner should prepare and download a new audit backup after each impor
 Synthetic Golden Import regression suite: **7 tests passing locally** as of 2026-09-28.
 
 The suite verifies mapping, term normalization, Section-aware identity, exact duplicate prevention, unknown-course review, pseudonymous-key enforcement, and manual course-map validation.
+
+
+## Secondary arts reference filter
+
+For Grades 6-12 enrollment rows, the importer uses the Florida Middle School Arts Courses (Grades 6-8) and Florida High School Arts Courses (Grades 9-12) reference layers as an allowlist.
+
+A row is retained when either:
+- its normalized Course Code matches an official arts Course Code for the applicable grade band, or
+- its exact normalized Course Title matches an official Full Course Title or Abbreviated Title for the applicable grade band.
+
+Rows matching neither are automatically excluded from active arts enrollment counts. They are not sent to a manual course-review queue. The original row remains preserved in the raw import audit with the exclusion reason.
+
+Title matching is intentionally conservative: case, punctuation, spacing, and ampersands are normalized, but fuzzy semantic matching is not used.
