@@ -16,9 +16,9 @@ const lower=v=>norm(v).toLowerCase();
 export function disciplineFromFlorida(reference){
   const d=lower(reference?.discipline);
   if(d.includes('music')) return 'Music';
-  if(d.includes('visual') || d.includes('art')) return 'Visual Art';
   if(d.includes('theatre') || d.includes('theater') || d.includes('drama')) return 'Theatre';
   if(d.includes('dance')) return 'Dance';
+  if(d.includes('visual') || d.includes('art')) return 'Visual Art';
   return 'Other / Review Needed';
 }
 
