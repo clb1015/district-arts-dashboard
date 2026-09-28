@@ -66,3 +66,10 @@ The synthetic acceptance fixture checks:
 ## Source of truth
 
 Do not create another independent importer or duplicate course-matching engine. Changes to enrollment ingestion belong here.
+
+
+## Acceptance status
+
+Synthetic Golden Import regression suite: **7 tests passing locally** as of 2026-09-28.
+
+The suite verifies mapping, term normalization, Section-aware identity, exact duplicate prevention, unknown-course review, pseudonymous-key enforcement, and manual course-map validation.
