@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SDOC Arts Import & Reconciliation</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="eyebrow">SDOC FINE & PERFORMING ARTS</span><h1>Arts Import & Reconciliation</h1><p>One controlled intake for enrollment data. Map it once, validate it before import, preserve the source, and keep every result traceable.</p></div>
+</header>
+<main>
+  <section class="privacy card">
+    <strong>Privacy boundary</strong>
+    <p>Use synthetic or appropriately de-identified student records only. Student keys should use <code>SYN-</code> or <code>ANON-</code> during this acceptance phase. Processing and saved import data remain in this browser.</p>
+    <span id="refStatus" class="pill">Loading FLDOE course reference…</span>
+  </section>
+
+  <section class="card">
+    <div class="step">1</div><h2>Upload</h2>
+    <p>Select a CSV, TSV, or XLSX student-course enrollment export. The file is read locally in your browser.</p>
+    <input id="file" type="file" accept=".csv,.tsv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+    <div id="status" class="status info">Choose a de-identified enrollment file to begin.</div>
+  </section>
+
+  <section id="mappingCard" class="card" hidden>
+    <div class="step">2</div><h2>Map columns</h2>
+    <p id="mappingNote"></p>
+    <div class="table-wrap"><table><thead><tr><th>Source column</th><th>Canonical field</th><th>Confidence</th><th>Sample values</th></tr></thead><tbody id="mappingBody"></tbody></table></div>
+    <div class="actions"><button id="validateBtn" class="primary">Validate import</button><button id="resetBtn" class="secondary">Start over</button></div>
+  </section>
+
+  <section id="validationCard" class="card" hidden>
+    <div class="step">3</div><h2>Validate</h2>
+    <div id="metrics" class="metrics"></div>
+    <div id="quality" class="quality"></div>
+    <h3>Issues found</h3><div id="issues"></div>
+  </section>
+
+  <section id="resolveCard" class="card" hidden>
+    <div class="step">4</div><h2>Resolve</h2>
+    <p>Nothing is guessed. Unknown terms, course codes, and ambiguous duplicate candidates must be explicitly handled.</p>
+    <div id="resolvers"></div>
+  </section>
+
+  <section id="commitCard" class="card" hidden>
+    <div class="step">5</div><h2>Approve & import</h2>
+    <div id="gate"></div>
+    <div class="actions"><button id="commitBtn" class="primary" disabled>Approve import</button></div>
+    <p class="muted">Golden Import certification is a later gate after the SDOC Pathway Dictionary coverage is calculated. This screen establishes a trustworthy normalized import first.</p>
+  </section>
+
+  <section class="card">
+    <div class="step">6</div><h2>Import history</h2>
+    <p>Withdrawals preserve the audit record while removing that import's contribution from active records.</p>
+    <div class="table-wrap"><table><thead><tr><th>Import</th><th>File</th><th>Source rows</th><th>Active records</th><th>Status</th><th>FLDOE match</th><th>Action</th></tr></thead><tbody id="historyBody"></tbody></table></div>
+  </section>
+</main>
+<footer>Canonical importer source: <code>clb1015/district-arts-dashboard</code></footer>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
