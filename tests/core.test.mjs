@@ -85,3 +85,22 @@ test('resolved synthetic import becomes import-ready and retains local unknown c
   assert.equal(a.reconciles,true);
   assert.equal(certificationGate(a).ready,true);
 });
+
+
+test('non-pseudonymous student keys are held and block import readiness',()=>{
+  const bad=[{...rows[0],'Student Number':'123456',__row_number:2}];
+  const mapping=mappingFromSuggestions(proposeMappings(headers,bad));
+  const a=analyzeImport(bad,mapping,ref);
+  assert.equal(a.counts.held,1);
+  assert.equal(a.issues.filter(i=>i.type==='Student Key Review').length,1);
+  assert.equal(certificationGate(a).ready,false);
+});
+
+test('manual course mapping must point to an actual reference code',()=>{
+  const one=[{...rows[9],__row_number:2}];
+  const mapping=mappingFromSuggestions(proposeMappings(headers,one));
+  const a=analyzeImport(one,mapping,ref,{terms:{},courses:{9999999:{action:'map',target:'1234567'}}});
+  assert.equal(a.counts.held,1);
+  assert.equal(a.issues.filter(i=>i.type==='Course Mapping Invalid').length,1);
+  assert.equal(certificationGate(a).ready,false);
+});
