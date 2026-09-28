@@ -9,7 +9,7 @@ export const FIELD_LABELS = {
 };
 
 export const ALIASES = {
-  student_id:['student id','student number','student num','student no','student identifier','studentid','studentnumber'],
+  student_id:['student id','anonymous student id','anon student id','student number','student num','student no','student identifier','studentid','studentnumber'],
   school:['school','campus','school name','campus name','location','site'],
   school_year:['school year','academic year','year','academic year name','schoolyear','academicyear'],
   term:['term','semester','semester name','session','course term','academic term','marking period','semester code','term code','s1/s2'],
