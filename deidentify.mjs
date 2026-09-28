@@ -69,3 +69,34 @@ export function toCSV(rows){
   const q=v=>'"'+String(v??'').replaceAll('"','""')+'"';
   return [headers.map(q).join(','),...rows.map(r=>headers.map(h=>q(r[h])).join(','))].join('\r\n');
 }
+
+
+export async function keyId(keyBase64){
+  const bytes=base64ToBytes(keyBase64);
+  const digest=new Uint8Array(await crypto.subtle.digest('SHA-256',bytes));
+  return [...digest.slice(0,6)].map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+
+export async function createKeyPackage(keyBase64,namespace='SDOC-ARTS-V1'){
+  await importHmacKey(keyBase64);
+  return JSON.stringify({
+    format:'sdoc-arts-deidentification-key',
+    version:1,
+    namespace,
+    keyId:await keyId(keyBase64),
+    createdAt:new Date().toISOString(),
+    key:keyBase64
+  },null,2);
+}
+
+export async function readKeyPackage(text){
+  let data;
+  try{ data=JSON.parse(text); }catch{ throw new Error('This is not a valid SDOC Arts de-identification key file.'); }
+  if(data?.format!=='sdoc-arts-deidentification-key' || data?.version!==1 || typeof data?.key!=='string'){
+    throw new Error('Unsupported de-identification key format.');
+  }
+  await importHmacKey(data.key);
+  const actual=await keyId(data.key);
+  if(data.keyId && data.keyId!==actual) throw new Error('De-identification key integrity check failed.');
+  return {keyBase64:data.key,namespace:data.namespace||'SDOC-ARTS-V1',keyId:actual,createdAt:data.createdAt||null};
+}
