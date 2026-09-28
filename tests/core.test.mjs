@@ -5,11 +5,11 @@ import {
 } from '../core.mjs';
 
 const rows = [
-  {'Student Number':'SYN-0001','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'Semester 1','Course Num':'1302300','Class Name':'Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'001','Local Extra':'source-A',__row_number:2},
-  {'Student Number':'SYN-0001','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'Semester 2','Course Num':'1302300','Class Name':'Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'001','Local Extra':'source-A',__row_number:3},
-  {'Student Number':'SYN-0002','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'S1','Course Num':'1302300','Class Name':'Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'001','Local Extra':'source-A',__row_number:4},
-  {'Student Number':'SYN-0002','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'S1','Course Num':'1302300','Class Name':'Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'002','Local Extra':'source-A',__row_number:5},
-  {'Student Number':'SYN-0003','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'Fall','Course Num':'1302310','Class Name':'Band 2','Instructor':'Teacher A','Grade Level':'7','Sec Num':'','Local Extra':'source-A',__row_number:6},
+  {'Student Number':'SYN-0001','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'Semester 1','Course Num':'1302000','Class Name':'M/J Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'001','Local Extra':'source-A',__row_number:2},
+  {'Student Number':'SYN-0001','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'Semester 2','Course Num':'1302000','Class Name':'M/J Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'001','Local Extra':'source-A',__row_number:3},
+  {'Student Number':'SYN-0002','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'S1','Course Num':'1302000','Class Name':'M/J Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'001','Local Extra':'source-A',__row_number:4},
+  {'Student Number':'SYN-0002','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'S1','Course Num':'1302000','Class Name':'M/J Band 1','Instructor':'Teacher A','Grade Level':'6','Sec Num':'002','Local Extra':'source-A',__row_number:5},
+  {'Student Number':'SYN-0003','Campus':'Harmony Middle School','Academic Year':'2026-27','Semester Name':'Fall','Course Num':'1302010','Class Name':'M/J Band 2','Instructor':'Teacher A','Grade Level':'7','Sec Num':'','Local Extra':'source-A',__row_number:6},
   {'Student Number':'SYN-0004','Campus':'St. Cloud High School','Academic Year':'2026-27','Semester Name':'Annual','Course Num':'0400310','Class Name':'Theatre 1','Instructor':'Teacher B','Grade Level':'9','Sec Num':'101','Local Extra':'source-B',__row_number:7},
   {'Student Number':'SYN-0005','Campus':'St. Cloud High School','Academic Year':'2026-27','Semester Name':'Full Year','Course Num':'0400410','Class Name':'Technical Theatre: Design & Production 1','Instructor':'Teacher C','Grade Level':'10','Sec Num':'201','Local Extra':'source-B',__row_number:8},
   {'Student Number':'SYN-0006','Campus':'St. Cloud High School','Academic Year':'2026-27','Semester Name':'Sem 2','Course Num':'0400310','Class Name':'Theatre 1','Instructor':'Teacher B','Grade Level':'9','Sec Num':'102','Local Extra':'source-B',__row_number:9},
@@ -21,8 +21,9 @@ const rows = [
 rows.push({...rows[0],__row_number:14});
 const headers=Object.keys(rows[0]).filter(k=>!k.startsWith('__'));
 const ref = new Map([
+  ['1302000',{code:'1302000',abbreviatedTitle:'M/J BAND 1',title:'M/J Band 1',discipline:'Music Education',gradeBand:'Grades 6-8'}],
+  ['1302010',{code:'1302010',abbreviatedTitle:'M/J BAND 2',title:'M/J Band 2',discipline:'Music Education',gradeBand:'Grades 6-8'}],
   ['1302300',{code:'1302300',abbreviatedTitle:'BAND 1',title:'Band 1',discipline:'Music Education',gradeBand:'Grades 9-12'}],
-  ['1302310',{code:'1302310',abbreviatedTitle:'BAND 2',title:'Band 2',discipline:'Music Education',gradeBand:'Grades 9-12'}],
   ['0400310',{code:'0400310',abbreviatedTitle:'THEATRE 1',title:'Theatre 1',discipline:'Drama / Theatre Arts',gradeBand:'Grades 9-12'}],
   ['0400410',{code:'0400410',abbreviatedTitle:'TECH THEATRE 1',title:'Technical Theatre: Design & Production 1',discipline:'Drama / Theatre Arts',gradeBand:'Grades 9-12'}],
 ]);
