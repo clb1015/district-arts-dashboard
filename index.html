@@ -57,6 +57,14 @@
     <p>Withdrawals preserve the audit record and original source file while removing that import's contribution from active records.</p>
     <div class="table-wrap"><table><thead><tr><th>Import</th><th>File</th><th>Source rows</th><th>Active records</th><th>Status</th><th>FLDOE match</th><th>Action</th></tr></thead><tbody id="historyBody"></tbody></table></div>
   </section>
+
+  <section class="card">
+    <h2>Local audit backup</h2>
+    <p>After each import or withdrawal, save a fresh backup in your approved local storage. It contains the full import history, mappings, resolutions, raw rows, and original source files. Restore it in an empty browser profile on this app.</p>
+    <div class="actions"><button id="backupBtn" class="secondary">Prepare backup</button><a id="backupLink" class="source-link" hidden>Download backup</a></div>
+    <div class="actions"><input id="restoreFile" type="file" accept=".json,application/json"><button id="restoreBtn" class="secondary">Restore backup</button></div>
+    <div id="backupStatus" class="status info">The backup stays on your device. Keep it in district-approved protected storage.</div>
+  </section>
 </main>
 <footer>Canonical importer source: <code>clb1015/district-arts-dashboard</code></footer>
 <script type="module" src="./app.js"></script>

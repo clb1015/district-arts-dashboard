@@ -2,13 +2,15 @@ import {
   CANONICAL_FIELDS,FIELD_LABELS,REQUIRED_FIELDS,proposeMappings,
   parseCSV,parseCourseReferenceCSV,analyzeImport,certificationGate,maskStudentKey
 } from './core.mjs';
-import {listImports,saveImport,withdrawImport,activeRecords} from './storage.mjs';
+import {listImports,saveImport,withdrawImport,activeRecords,restoreImports} from './storage.mjs';
+import {createBackup,readBackup} from './backup.mjs';
 
 const state={file:null,fileBytes:null,rows:[],headers:[],suggestions:[],reference:new Map(),resolutions:{terms:{},courses:{},duplicates:{}},analysis:null,fingerprint:'',sheetNames:[]};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>new Intl.NumberFormat().format(n||0);
 let sourceUrls=[];
+let backupUrl=null;
 
 async function sha256(bytes){
   const h=await crypto.subtle.digest('SHA-256',bytes);
@@ -203,6 +205,7 @@ async function commitImport(){
 }
 
 async function renderHistory(){
+  if(backupUrl){URL.revokeObjectURL(backupUrl);backupUrl=null;$('backupLink').hidden=true;}
   const imports=await listImports();
   sourceUrls.forEach(url=>URL.revokeObjectURL(url));
   sourceUrls=imports.map(i=>i.sourceFile ? URL.createObjectURL(i.sourceFile) : null);
@@ -216,6 +219,37 @@ async function renderHistory(){
     }
   });
 }
+
+$('backupBtn').addEventListener('click',async()=>{
+  const label=$('backupStatus');
+  try{
+    const imports=await listImports();
+    if(!imports.length) throw new Error('No import history exists to back up.');
+    if(backupUrl) URL.revokeObjectURL(backupUrl);
+    backupUrl=URL.createObjectURL(new Blob([await createBackup(imports)],{type:'application/json'}));
+    const link=$('backupLink');
+    link.href=backupUrl;
+    link.download=`sdoc-arts-audit-${new Date().toISOString().slice(0,10)}.json`;
+    link.hidden=false;
+    label.textContent=`Backup ready: ${fmt(imports.length)} imports. Click Download backup and save it in district-approved protected storage.`;
+    label.className='status success';
+  }catch(e){label.textContent=e.message;label.className='status error';}
+});
+
+$('restoreBtn').addEventListener('click',async()=>{
+  const label=$('backupStatus');
+  try{
+    const file=$('restoreFile').files[0];
+    if(!file) throw new Error('Choose a backup JSON file first.');
+    if((await listImports()).length) throw new Error('Restore requires an empty import history. Use a fresh browser profile.');
+    const records=await readBackup(await file.text());
+    if(!records.length) throw new Error('Backup contains no imports.');
+    await restoreImports(records);
+    await renderHistory();
+    label.textContent=`Restored ${fmt(records.length)} imports with source files and audit history.`;
+    label.className='status success';
+  }catch(e){label.textContent=e.message||String(e);label.className='status error';}
+});
 
 $('file').addEventListener('change',handleFile);
 $('validateBtn').addEventListener('click',runAnalysis);

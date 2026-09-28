@@ -47,3 +47,15 @@ export async function clearAll(){
   const db=await openDb(); const tx=db.transaction(IMPORTS,'readwrite');
   await reqPromise(tx.objectStore(IMPORTS).clear()); db.close();
 }
+
+export async function restoreImports(records){
+  if((await listImports()).length) throw new Error('Restore requires an empty import history.');
+  const db=await openDb();
+  try{
+    const tx=db.transaction(IMPORTS,'readwrite');
+    const store=tx.objectStore(IMPORTS);
+    const complete=new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Restore failed.'));});
+    records.forEach(record=>store.add(record));
+    await complete;
+  }finally{ db.close(); }
+}
