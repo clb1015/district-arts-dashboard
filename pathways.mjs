@@ -137,7 +137,14 @@ export function aggregateObservedCourses(records, referenceMap, savedMap=new Map
     const code=norm(m.course_code); if(!code) continue;
     let g=groups.get(code);
     if(!g){
-      g={code,reference:referenceMap.get(code)||null,titles:new Set(),schools:new Set(),students:new Set(),enrollmentCount:0};
+      const referenceCode=norm(m.reference_code);
+      const embeddedReference=m.reference_title||m.reference_discipline ? {
+        code:referenceCode||code,
+        title:norm(m.reference_title)||norm(m.course_title),
+        discipline:norm(m.reference_discipline),
+        gradeBand:norm(m.reference_grade_band)
+      } : null;
+      g={code,reference:(referenceCode?referenceMap.get(referenceCode):null)||referenceMap.get(code)||embeddedReference,titles:new Set(),schools:new Set(),students:new Set(),enrollmentCount:0};
       groups.set(code,g);
     }
     if(m.course_title) g.titles.add(norm(m.course_title));
