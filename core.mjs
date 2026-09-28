@@ -111,6 +111,63 @@ export function normalizeCourseCode(value, referenceCodes=[]){
   return {raw, normalized:compact, matchType:'unmatched'};
 }
 
+export function normalizeCourseTitle(value){
+  return clean(value)
+    .normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase()
+    .replace(/&/g,' and ')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+export function referenceCandidatesForGrade(courseReference, grade){
+  const raw=clean(grade).toUpperCase();
+  const numeric=Number(raw.replace(/^0+/,''));
+  let bands;
+  if(raw==='K' || raw==='KG' || raw==='KINDERGARTEN' || (Number.isFinite(numeric) && numeric>=0 && numeric<=5)){
+    bands=['Pre-K to 5'];
+  }else if(Number.isFinite(numeric) && numeric>=6 && numeric<=8){
+    bands=['Grades 6-8'];
+  }else if(Number.isFinite(numeric) && numeric>=9 && numeric<=12){
+    bands=['Grades 9-12'];
+  }else{
+    // Missing/unknown grade defaults to the two secondary reference files requested for this workflow.
+    bands=['Grades 6-8','Grades 9-12'];
+  }
+  return [...courseReference.values()].filter(r=>bands.includes(r.gradeBand));
+}
+
+export function matchCourseReference(courseCode, courseTitle, grade, courseReference){
+  const candidates=referenceCandidatesForGrade(courseReference,grade);
+  const byCode=new Map(candidates.map(r=>[r.code,r]));
+  const codeInfo=normalizeCourseCode(courseCode,[...byCode.keys()]);
+  if(['exact','normalized'].includes(codeInfo.matchType)){
+    const reference=byCode.get(codeInfo.normalized)||null;
+    return {matchType:codeInfo.matchType,codeInfo,reference,referenceCode:reference?.code||'',titleMatches:[]};
+  }
+
+  const titleKey=normalizeCourseTitle(courseTitle);
+  if(titleKey){
+    const titleMatches=candidates.filter(r=>{
+      const full=normalizeCourseTitle(r.title);
+      const abbr=normalizeCourseTitle(r.abbreviatedTitle);
+      return titleKey===full || titleKey===abbr;
+    });
+    if(titleMatches.length){
+      const reference=titleMatches[0];
+      return {
+        matchType:titleMatches.length===1?'title-exact':'title-exact-ambiguous',
+        codeInfo,
+        reference,
+        referenceCode:titleMatches.length===1?reference.code:'',
+        titleMatches
+      };
+    }
+  }
+  return {matchType:'unmatched',codeInfo,reference:null,referenceCode:'',titleMatches:[]};
+}
+
 export function normalizeSection(value){
   const raw = clean(value);
   return {raw, normalized: raw.replace(/\.0+$/,'')};
@@ -162,9 +219,8 @@ export function stableObjectString(obj){
 
 export function analyzeImport(rawRows, mapping, courseReference=new Map(), resolutions={terms:{},courses:{},duplicates:{}}, existingRecords=[]){
   const missingMappings=missingRequiredMappings(mapping);
-  const referenceCodes=[...courseReference.keys()];
   const rows=[]; const exactSeen=new Map(); const identitySeen=new Map();
-  const counts={sourceRows:rawRows.length,accepted:0,held:0,excluded:0,exactDuplicates:0,possibleDuplicates:0,existing:0,newRecords:0,conflicts:0};
+  const counts={sourceRows:rawRows.length,accepted:0,held:0,excluded:0,autoReferenceExcluded:0,exactDuplicates:0,possibleDuplicates:0,existing:0,newRecords:0,conflicts:0};
   const issues=[];
 
   for(const raw of rawRows){
@@ -177,9 +233,15 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
     mapped.term=termInfo.normalized || termResolution || '';
     const sectionInfo=normalizeSection(mapped.section);
     mapped.raw_section=sectionInfo.raw; mapped.section=sectionInfo.normalized;
-    const codeInfo=normalizeCourseCode(mapped.course_code, referenceCodes);
-    mapped.raw_course_code=codeInfo.raw; mapped.course_code=codeInfo.normalized;
-    mapped.course_match_type=codeInfo.matchType;
+    const referenceMatch=matchCourseReference(mapped.course_code,mapped.course_title,mapped.grade,courseReference);
+    const codeInfo=referenceMatch.codeInfo;
+    mapped.raw_course_code=codeInfo.raw;
+    mapped.course_code=codeInfo.normalized;
+    mapped.course_match_type=referenceMatch.matchType;
+    mapped.reference_code=referenceMatch.referenceCode;
+    mapped.reference_title=referenceMatch.reference?.title||'';
+    mapped.reference_discipline=referenceMatch.reference?.discipline||'';
+    mapped.reference_grade_band=referenceMatch.reference?.gradeBand||'';
 
     const missingValues=REQUIRED_FIELDS.filter(f=>!clean(mapped[f]));
     const rowIssues=[];
@@ -188,17 +250,8 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
     if(mapped.student_id && !/^(SYN|ANON)-/i.test(mapped.student_id)) rowIssues.push({type:'Student Key Review',detail:'Student key is not SYN-/ANON- prefixed.'});
     if(termInfo.status==='review' && !termResolution) rowIssues.push({type:'Unknown Term',detail:termInfo.raw});
 
-    let courseAction = null;
-    if(codeInfo.matchType==='unmatched'){
-      courseAction=resolutions?.courses?.[mapped.raw_course_code] || null;
-      if(!courseAction) rowIssues.push({type:'Questionable Course Code',detail:mapped.raw_course_code});
-      else if(courseAction.action==='map' && courseReference.has(courseAction.target)){
-        mapped.course_code=courseAction.target; mapped.course_match_type='manual-map';
-      } else if(courseAction.action==='map') {
-        rowIssues.push({type:'Course Mapping Invalid',detail:courseAction.target || 'No target code supplied'});
-      }
-    }
     const isAdministrativeWaiver=ADMINISTRATIVE_WAIVER_CODES.has(mapped.course_code);
+    const isReferenceExcluded=referenceMatch.matchType==='unmatched' && !isAdministrativeWaiver;
 
     const exactSig=stableObjectString(raw);
     const exactFirst=exactSeen.get(exactSig);
@@ -220,22 +273,20 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
     const hasPossibleDuplicate=rowIssues.some(i=>i.type==='Possible Duplicate');
     const duplicateResolution=resolutions?.duplicates?.[raw.__row_number] || null;
     let disposition='accepted';
-    if(missingMappings.length || missingValues.length || (termInfo.status==='review' && !termResolution) || rowIssues.some(i=>i.type==='Student Key Review' || i.type==='Course Mapping Invalid')) disposition='held';
+    if(missingMappings.length || missingValues.length || (termInfo.status==='review' && !termResolution) || rowIssues.some(i=>i.type==='Student Key Review')) disposition='held';
     if(hasPossibleDuplicate && !duplicateResolution) disposition='held';
     if(hasPossibleDuplicate && duplicateResolution==='exclude') disposition='excluded';
     if(hasPossibleDuplicate && duplicateResolution==='hold') disposition='held';
-    if(courseAction?.action==='exclude') disposition='excluded';
-    else if(courseAction?.action==='hold') disposition='held';
-    else if(codeInfo.matchType==='unmatched' && !courseAction) disposition='held';
-    else if(courseAction?.action==='local') mapped.course_match_type='local';
+    if(disposition==='accepted' && isReferenceExcluded) disposition='excluded';
     if(isAdministrativeWaiver) disposition='excluded';
     if(exactFirst) disposition='duplicate';
 
     if(disposition==='accepted') {counts.accepted++; if(!existing) counts.newRecords++;}
     else if(disposition==='held') counts.held++;
-    else if(disposition==='excluded') counts.excluded++;
+    else if(disposition==='excluded') {counts.excluded++; if(isReferenceExcluded && !isAdministrativeWaiver) counts.autoReferenceExcluded++;}
 
-    const record={sourceRow:raw.__row_number,raw,mapped,identity,issues:rowIssues,disposition,exclusionReason:isAdministrativeWaiver && disposition==='excluded'?'Administrative waiver':null,duplicateResolved:!hasPossibleDuplicate || duplicateResolution==='keep' || duplicateResolution==='exclude',reference:courseReference.get(mapped.course_code)||null};
+    const exclusionReason=isAdministrativeWaiver && disposition==='excluded'?'Administrative waiver':(isReferenceExcluded && disposition==='excluded'?'No code or title match in Florida arts reference':null);
+    const record={sourceRow:raw.__row_number,raw,mapped,identity,issues:rowIssues,disposition,exclusionReason,duplicateResolved:!hasPossibleDuplicate || duplicateResolution==='keep' || duplicateResolution==='exclude',reference:referenceMatch.reference};
     rowIssues.forEach(issue=>issues.push({...issue,sourceRow:raw.__row_number,studentKey:maskStudentKey(mapped.student_id),courseCode:mapped.raw_course_code}));
     rows.push(record);
   }
@@ -245,7 +296,7 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
   for(const r of rows){
     const m=r.mapped; if(m.school)schools.add(m.school); if(m.school_year)years.add(m.school_year); if(m.course_code)codes.add(m.course_code); if(m.course_title)titles.add(m.course_title); if(m.teacher)teachers.add(m.teacher); if(m.section)sections.add(m.section); if(m.term)terms[m.term]=(terms[m.term]||0)+1;
   }
-  const matchedRows=rows.filter(r=>r.disposition!=='duplicate' && r.disposition!=='excluded' && ['exact','normalized','manual-map'].includes(r.mapped.course_match_type)).length;
+  const matchedRows=rows.filter(r=>r.disposition!=='duplicate' && r.disposition!=='excluded' && ['exact','normalized','title-exact','title-exact-ambiguous'].includes(r.mapped.course_match_type)).length;
   const referenceEligible=rows.filter(r=>r.disposition!=='duplicate' && r.disposition!=='excluded').length;
   const fldoeCoverage=referenceEligible ? matchedRows/referenceEligible : 0;
   const reconciliationTotal=counts.accepted+counts.held+counts.excluded+counts.exactDuplicates;
@@ -263,9 +314,7 @@ export function certificationGate(analysis){
   if(analysis.missingMappings.length) blockers.push('Required field mapping is incomplete.');
   if(!analysis.reconciles) blockers.push('Import reconciliation does not balance.');
   if(analysis.issues.some(i=>i.type==='Unknown Term')) blockers.push('Unknown term values remain unresolved.');
-  if(analysis.issues.some(i=>i.type==='Questionable Course Code')) blockers.push('Unknown course codes remain unacknowledged.');
   if(analysis.issues.some(i=>i.type==='Student Key Review')) blockers.push('Student keys must use approved pseudonymous identifiers before import.');
-  if(analysis.issues.some(i=>i.type==='Course Mapping Invalid')) blockers.push('A manual course mapping points to an unknown FLDOE course code.');
   if(analysis.rows.some(r=>r.issues.some(i=>i.type==='Possible Duplicate') && !r.duplicateResolved)) blockers.push('Possible duplicates remain unresolved.');
   if(analysis.counts.accepted===0) blockers.push('No enrollment records are eligible for import.');
   return {ready:blockers.length===0,blockers};
