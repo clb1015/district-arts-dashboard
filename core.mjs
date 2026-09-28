@@ -1,6 +1,7 @@
 export const REQUIRED_FIELDS = ['student_id','school','school_year','term','course_code','course_title'];
 export const OPTIONAL_FIELDS = ['teacher','grade','section'];
 export const CANONICAL_FIELDS = [...REQUIRED_FIELDS, ...OPTIONAL_FIELDS];
+export const ADMINISTRATIVE_WAIVER_CODES = new Set(['1500440','1500441','1500442','1500445']);
 
 export const FIELD_LABELS = {
   student_id:'Student ID', school:'School', school_year:'School Year', term:'Term',
@@ -197,6 +198,8 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
         rowIssues.push({type:'Course Mapping Invalid',detail:courseAction.target || 'No target code supplied'});
       }
     }
+    const isAdministrativeWaiver=ADMINISTRATIVE_WAIVER_CODES.has(mapped.course_code);
+    if(isAdministrativeWaiver) rowIssues.push({type:'Administrative Waiver Excluded',detail:`${mapped.course_code} is a non-instructional waiver; retained in source audit only.`});
 
     const exactSig=stableObjectString(raw);
     const exactFirst=exactSeen.get(exactSig);
@@ -217,7 +220,6 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
     const hasPossibleDuplicate=rowIssues.some(i=>i.type==='Possible Duplicate');
     const duplicateResolution=resolutions?.duplicates?.[raw.__row_number] || null;
     let disposition='accepted';
-    if(exactFirst) disposition='duplicate';
     if(missingMappings.length || missingValues.length || (termInfo.status==='review' && !termResolution) || rowIssues.some(i=>i.type==='Student Key Review' || i.type==='Course Mapping Invalid')) disposition='held';
     if(hasPossibleDuplicate && !duplicateResolution) disposition='held';
     if(hasPossibleDuplicate && duplicateResolution==='exclude') disposition='excluded';
@@ -226,12 +228,14 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
     else if(courseAction?.action==='hold') disposition='held';
     else if(codeInfo.matchType==='unmatched' && !courseAction) disposition='held';
     else if(courseAction?.action==='local') mapped.course_match_type='local';
+    if(isAdministrativeWaiver) disposition='excluded';
+    if(exactFirst) disposition='duplicate';
 
     if(disposition==='accepted') {counts.accepted++; if(!existing) counts.newRecords++;}
     else if(disposition==='held') counts.held++;
     else if(disposition==='excluded') counts.excluded++;
 
-    const record={sourceRow:raw.__row_number,raw,mapped,identity,issues:rowIssues,disposition,duplicateResolved:!hasPossibleDuplicate || duplicateResolution==='keep' || duplicateResolution==='exclude',reference:courseReference.get(mapped.course_code)||null};
+    const record={sourceRow:raw.__row_number,raw,mapped,identity,issues:rowIssues,disposition,exclusionReason:isAdministrativeWaiver && disposition==='excluded'?'Administrative waiver':null,duplicateResolved:!hasPossibleDuplicate || duplicateResolution==='keep' || duplicateResolution==='exclude',reference:courseReference.get(mapped.course_code)||null};
     rowIssues.forEach(issue=>issues.push({...issue,sourceRow:raw.__row_number,studentKey:maskStudentKey(mapped.student_id),courseCode:mapped.raw_course_code}));
     rows.push(record);
   }
@@ -241,7 +245,7 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
   for(const r of rows){
     const m=r.mapped; if(m.school)schools.add(m.school); if(m.school_year)years.add(m.school_year); if(m.course_code)codes.add(m.course_code); if(m.course_title)titles.add(m.course_title); if(m.teacher)teachers.add(m.teacher); if(m.section)sections.add(m.section); if(m.term)terms[m.term]=(terms[m.term]||0)+1;
   }
-  const matchedRows=rows.filter(r=>r.disposition!=='duplicate' && ['exact','normalized','manual-map'].includes(r.mapped.course_match_type)).length;
+  const matchedRows=rows.filter(r=>r.disposition!=='duplicate' && r.disposition!=='excluded' && ['exact','normalized','manual-map'].includes(r.mapped.course_match_type)).length;
   const referenceEligible=rows.filter(r=>r.disposition!=='duplicate' && r.disposition!=='excluded').length;
   const fldoeCoverage=referenceEligible ? matchedRows/referenceEligible : 0;
   const reconciliationTotal=counts.accepted+counts.held+counts.excluded+counts.exactDuplicates;

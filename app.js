@@ -85,7 +85,7 @@ function unmappedColumns(){
 
 function renderValidation(a){
   const metrics=[
-    ['Source rows',a.counts.sourceRows],['Eligible now',a.counts.accepted],['Held for review',a.counts.held],['Exact duplicates',a.counts.exactDuplicates],
+    ['Source rows',a.counts.sourceRows],['Eligible now',a.counts.accepted],['Held for review',a.counts.held],['Excluded',a.counts.excluded],['Exact duplicates',a.counts.exactDuplicates],
     ['Unique eligible students',a.uniqueStudents],['Schools',a.schools.length],['School years',a.years.length],['Course codes',a.codes.length]
   ];
   $('metrics').innerHTML=metrics.map(([k,v])=>`<div class="metric"><span>${esc(k)}</span><strong>${fmt(v)}</strong></div>`).join('');
@@ -195,7 +195,7 @@ async function commitImport(){
     rawRows:state.rows,
     sourceFile:new Blob([state.fileBytes],{type:state.file.type||'application/octet-stream'}),
     acceptedRecords:accepted,
-    audit:{rawPreserved:true,reconciles:state.analysis.reconciles,unmappedColumns:unmappedColumns(),sheetNames:state.sheetNames}
+    audit:{rawPreserved:true,reconciles:state.analysis.reconciles,unmappedColumns:unmappedColumns(),sheetNames:state.sheetNames,exclusions:state.analysis.rows.filter(r=>r.disposition==='excluded').map(r=>({sourceRow:r.sourceRow,courseCode:r.mapped.course_code,reason:r.exclusionReason||'Manual exclusion'}))}
   };
   await saveImport(record);
   status(`${record.id} imported: ${fmt(accepted.length)} active enrollment records from ${fmt(record.sourceRows)} source rows.`,'success');

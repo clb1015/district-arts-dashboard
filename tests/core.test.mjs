@@ -104,3 +104,20 @@ test('manual course mapping must point to an actual reference code',()=>{
   assert.equal(a.issues.filter(i=>i.type==='Course Mapping Invalid').length,1);
   assert.equal(certificationGate(a).ready,false);
 });
+
+test('administrative waivers stay in source audit but out of enrollment and coverage',()=>{
+  const waiverCodes=['1500440','1500441','1500442','1500445'];
+  const waiverRows=waiverCodes.map((code,i)=>({...rows[0],'Student Number':`SYN-W${i+1}`,'Course Num':code,'Class Name':'Administrative waiver',__row_number:i+2}));
+  const source=[...waiverRows,{...waiverRows[0],__row_number:6},{...rows[0],__row_number:7}];
+  const reference=new Map([...ref,...waiverCodes.map(code=>[code,{code,title:'Administrative waiver'}])]);
+  const mapping=mappingFromSuggestions(proposeMappings(headers,source));
+  const a=analyzeImport(source,mapping,reference);
+  assert.deepEqual([a.counts.sourceRows,a.counts.accepted,a.counts.excluded,a.counts.exactDuplicates,a.uniqueStudents],[6,1,4,1,1]);
+  assert.equal(a.fldoeCoverage,1);
+  assert.equal(a.reconciles,true);
+  assert.equal(certificationGate(a).ready,true);
+  assert.deepEqual(a.rows.filter(r=>r.disposition==='excluded').map(r=>r.mapped.course_code),waiverCodes);
+  assert.equal(a.rows[4].disposition,'duplicate');
+  assert.equal(a.rows[0].raw['Course Num'],'1500440');
+  assert.equal(a.rows[0].exclusionReason,'Administrative waiver');
+});
