@@ -13,15 +13,17 @@ test('audit backup round-trips a source file, withdrawn status, raw rows, and re
     acceptedRecords:[{identity:'SYN-0001|2026-2027|Fall|School|1302300|001',mapped:{student_id:'SYN-0001'}}],
     mapping:{student_id:'Student Number'},resolutions:{terms:{T2:'Spring'},courses:{},duplicates:{}},audit:{rawPreserved:true},
     sourceFile:new Blob([bytes],{type:'text/csv'})};
-  const restored=await readBackup(await createBackup([record]));
-  assert.equal(restored.length,1);
-  assert.equal(restored[0].status,'withdrawn');
-  assert.equal(restored[0].rawRows[0]['Local Extra'],'preserved');
-  assert.equal(restored[0].resolutions.terms.T2,'Spring');
-  assert.deepEqual(new Uint8Array(await restored[0].sourceFile.arrayBuffer()),bytes);
+  const restored=await readBackup(await createBackup([record],[{code:'1302300',include:'Yes',discipline:'Music',subdiscipline:'Band',pathway:'Band',courseLevel:'Beginning',status:'Administrator Confirmed'}]));
+  assert.equal(restored.records.length,1);
+  assert.equal(restored.records[0].status,'withdrawn');
+  assert.equal(restored.records[0].rawRows[0]['Local Extra'],'preserved');
+  assert.equal(restored.records[0].resolutions.terms.T2,'Spring');
+  assert.deepEqual(new Uint8Array(await restored.records[0].sourceFile.arrayBuffer()),bytes);
+  assert.equal(restored.pathways.length,1);
+  assert.equal(restored.pathways[0].pathway,'Band');
   const legacy=await readBackup(await createBackup([{...record,id:'IMP-87654321',sourceFile:null}]));
-  assert.equal(legacy[0].sourceFile,null);
-  assert.equal(legacy[0].rawRows[0]['Local Extra'],'preserved');
+  assert.equal(legacy.records[0].sourceFile,null);
+  assert.equal(legacy.records[0].rawRows[0]['Local Extra'],'preserved');
 
   const tampered=JSON.parse(await createBackup([record]));
   tampered.records[0].source.base64=Buffer.from('altered').toString('base64');
