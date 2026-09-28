@@ -193,6 +193,8 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
       if(!courseAction) rowIssues.push({type:'Questionable Course Code',detail:mapped.raw_course_code});
       else if(courseAction.action==='map' && courseReference.has(courseAction.target)){
         mapped.course_code=courseAction.target; mapped.course_match_type='manual-map';
+      } else if(courseAction.action==='map') {
+        rowIssues.push({type:'Course Mapping Invalid',detail:courseAction.target || 'No target code supplied'});
       }
     }
 
@@ -216,7 +218,7 @@ export function analyzeImport(rawRows, mapping, courseReference=new Map(), resol
     const duplicateResolution=resolutions?.duplicates?.[raw.__row_number] || null;
     let disposition='accepted';
     if(exactFirst) disposition='duplicate';
-    if(missingMappings.length || missingValues.length || (termInfo.status==='review' && !termResolution)) disposition='held';
+    if(missingMappings.length || missingValues.length || (termInfo.status==='review' && !termResolution) || rowIssues.some(i=>i.type==='Student Key Review' || i.type==='Course Mapping Invalid')) disposition='held';
     if(hasPossibleDuplicate && !duplicateResolution) disposition='held';
     if(hasPossibleDuplicate && duplicateResolution==='exclude') disposition='excluded';
     if(hasPossibleDuplicate && duplicateResolution==='hold') disposition='held';
@@ -258,6 +260,8 @@ export function certificationGate(analysis){
   if(!analysis.reconciles) blockers.push('Import reconciliation does not balance.');
   if(analysis.issues.some(i=>i.type==='Unknown Term')) blockers.push('Unknown term values remain unresolved.');
   if(analysis.issues.some(i=>i.type==='Questionable Course Code')) blockers.push('Unknown course codes remain unacknowledged.');
+  if(analysis.issues.some(i=>i.type==='Student Key Review')) blockers.push('Student keys must use approved pseudonymous identifiers before import.');
+  if(analysis.issues.some(i=>i.type==='Course Mapping Invalid')) blockers.push('A manual course mapping points to an unknown FLDOE course code.');
   if(analysis.rows.some(r=>r.issues.some(i=>i.type==='Possible Duplicate') && !r.duplicateResolved)) blockers.push('Possible duplicates remain unresolved.');
   if(analysis.counts.accepted===0) blockers.push('No enrollment records are eligible for import.');
   return {ready:blockers.length===0,blockers};
