@@ -191,6 +191,7 @@ async function commitImport(){
     years:state.analysis.years,
     terms:state.analysis.terms,
     fldoeCoverage:state.analysis.fldoeCoverage,
+    rawRows:state.rows,
     acceptedRecords:accepted,
     audit:{rawPreserved:true,reconciles:state.analysis.reconciles,unmappedColumns:unmappedColumns(),sheetNames:state.sheetNames}
   };
