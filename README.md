@@ -41,7 +41,7 @@ python -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-XLSX parsing is currently loaded from a pinned SheetJS browser distribution. CSV/TSV parsing uses the repository's local code.
+XLSX parsing uses the pinned SheetJS 0.20.3 browser distribution stored in `vendor/`, so workbook upload does not depend on a third-party CDN at runtime. CSV/TSV parsing uses the repository's local code. Imports and original file bytes are stored in this browser's IndexedDB and are not shared across devices.
 
 ## Tests
 

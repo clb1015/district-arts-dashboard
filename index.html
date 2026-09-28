@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SDOC Arts Import & Reconciliation</title>
   <link rel="stylesheet" href="./styles.css">
-  <script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script defer src="./vendor/xlsx.full.min.js"></script>
 </head>
 <body>
 <header>
@@ -54,7 +54,7 @@
 
   <section class="card">
     <div class="step">6</div><h2>Import history</h2>
-    <p>Withdrawals preserve the audit record while removing that import's contribution from active records.</p>
+    <p>Withdrawals preserve the audit record and original source file while removing that import's contribution from active records.</p>
     <div class="table-wrap"><table><thead><tr><th>Import</th><th>File</th><th>Source rows</th><th>Active records</th><th>Status</th><th>FLDOE match</th><th>Action</th></tr></thead><tbody id="historyBody"></tbody></table></div>
   </section>
 </main>
