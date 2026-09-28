@@ -8,6 +8,7 @@ const state={file:null,fileBytes:null,rows:[],headers:[],suggestions:[],referenc
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>new Intl.NumberFormat().format(n||0);
+let sourceUrls=[];
 
 async function sha256(bytes){
   const h=await crypto.subtle.digest('SHA-256',bytes);
@@ -203,22 +204,16 @@ async function commitImport(){
 
 async function renderHistory(){
   const imports=await listImports();
+  sourceUrls.forEach(url=>URL.revokeObjectURL(url));
+  sourceUrls=imports.map(i=>i.sourceFile ? URL.createObjectURL(i.sourceFile) : null);
   $('historyBody').innerHTML=imports.length
-    ? imports.map(i=>`<tr><td><strong>${esc(i.id)}</strong><br><span class="muted">${new Date(i.createdAt).toLocaleString()}</span></td><td>${esc(i.filename)}</td><td>${fmt(i.sourceRows)}</td><td>${fmt(i.acceptedRows)}</td><td>${esc(i.status)}</td><td>${(i.fldoeCoverage*100).toFixed(1)}%</td><td>${i.sourceFile?`<button class="secondary download-source" data-id="${esc(i.id)}">Download source</button>`:'Raw rows saved'} ${i.status==='active'?`<button class="secondary withdraw" data-id="${esc(i.id)}">Withdraw</button>`:''}</td></tr>`).join('')
+    ? imports.map((i,n)=>`<tr><td><strong>${esc(i.id)}</strong><br><span class="muted">${new Date(i.createdAt).toLocaleString()}</span></td><td>${esc(i.filename)}</td><td>${fmt(i.sourceRows)}</td><td>${fmt(i.acceptedRows)}</td><td>${esc(i.status)}</td><td>${(i.fldoeCoverage*100).toFixed(1)}%</td><td>${sourceUrls[n]?`<a class="source-link" href="${esc(sourceUrls[n])}" download="${esc(i.filename)}">Download source</a>`:'Raw rows saved'} ${i.status==='active'?`<button class="secondary withdraw" data-id="${esc(i.id)}">Withdraw</button>`:''}</td></tr>`).join('')
     : '<tr><td colspan="7" class="muted">No imports yet.</td></tr>';
   document.querySelectorAll('.withdraw').forEach(btn=>btn.onclick=async()=>{
     if(confirm(`Withdraw ${btn.dataset.id}? This removes its contribution from active records but preserves audit history.`)){
       await withdrawImport(btn.dataset.id); await renderHistory();
       status(`${btn.dataset.id} withdrawn. Active records were recalculated from remaining imports.`,'success');
     }
-  });
-  document.querySelectorAll('.download-source').forEach(btn=>btn.onclick=async()=>{
-    const source=(await listImports()).find(i=>i.id===btn.dataset.id);
-    if(!source?.sourceFile) return;
-    const url=URL.createObjectURL(source.sourceFile);
-    const link=document.createElement('a'); link.href=url; link.download=source.filename;
-    document.body.appendChild(link); link.click(); link.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),60000);
   });
 }
 
