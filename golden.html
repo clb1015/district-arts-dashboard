@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Golden Import Summary | SDOC Arts Data</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="eyebrow">SDOC FINE & PERFORMING ARTS</span>
+    <h1>Golden Import Summary</h1>
+    <p>Confirm that an import is reconciled, reference-matched, classified, and privacy-safe before it becomes the trusted benchmark for analytics.</p>
+    <nav class="topnav">
+      <a href="./">Import & Reconciliation</a>
+      <a href="./pathways.html">Pathway Dictionary</a>
+      <a class="active" href="./golden.html">Golden Import Summary</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="privacy card">
+    <strong>Certification boundary</strong>
+    <p><code>SYN-</code> records can pass synthetic acceptance. A production Golden Import requires a de-identified district export using approved <code>ANON-</code> keys. Student identifiers are never displayed on this page.</p>
+    <span id="statusPill" class="pill">Loading certification status…</span>
+  </section>
+
+  <section class="card">
+    <h2>Import candidate</h2>
+    <div class="toolbar">
+      <label>Active import
+        <select id="importSelect"></select>
+      </label>
+    </div>
+    <div id="candidateStatus" class="status info"></div>
+  </section>
+
+  <section class="card">
+    <h2>Import quality</h2>
+    <div id="importMetrics" class="metrics"></div>
+  </section>
+
+  <section class="card">
+    <h2>Reference quality</h2>
+    <div id="referenceMetrics" class="metrics"></div>
+    <div id="reviewDetail" class="quality"></div>
+  </section>
+
+  <section class="card">
+    <h2>Dataset composition</h2>
+    <div id="compositionMetrics" class="metrics"></div>
+    <div id="compositionDetail" class="quality"></div>
+  </section>
+
+  <section class="card">
+    <h2>Certification gate</h2>
+    <div id="gate"></div>
+    <div class="actions">
+      <button id="certifyBtn" class="primary" disabled></button>
+      <button id="exportBtn" class="secondary" disabled>Export acceptance summary</button>
+    </div>
+    <div id="recordStatus" class="status info">No certification action has been recorded in this browser yet.</div>
+  </section>
+</main>
+<footer>Canonical source: <code>clb1015/district-arts-dashboard</code></footer>
+<script type="module" src="./golden.js"></script>
+</body>
+</html>
