@@ -135,7 +135,7 @@ export function referenceCandidatesForGrade(courseReference, grade){
     // Missing/unknown grade defaults to the two secondary reference files requested for this workflow.
     bands=['Grades 6-8','Grades 9-12'];
   }
-  return [...courseReference.values()].filter(r=>bands.includes(r.gradeBand));
+  return [...courseReference.values()].filter(r=>!r.gradeBand || bands.includes(r.gradeBand));
 }
 
 export function matchCourseReference(courseCode, courseTitle, grade, courseReference){
