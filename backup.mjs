@@ -1,5 +1,5 @@
 export const BACKUP_FORMAT='sdoc-arts-import-backup';
-export const BACKUP_VERSION=2;
+export const BACKUP_VERSION=3;
 
 async function checksum(bytes){
   const digest=await crypto.subtle.digest('SHA-256',bytes);
@@ -21,7 +21,7 @@ function decode(value){
   return Uint8Array.from(binary,c=>c.charCodeAt(0));
 }
 
-export async function createBackup(imports,pathways=[]){
+export async function createBackup(imports,pathways=[],certifications=[]){
   const records=[];
   for(const record of imports){
     const {sourceFile,...metadata}=record;
@@ -32,13 +32,13 @@ export async function createBackup(imports,pathways=[]){
     }
     records.push({...metadata,source});
   }
-  return JSON.stringify({format:BACKUP_FORMAT,version:BACKUP_VERSION,createdAt:new Date().toISOString(),records,pathways});
+  return JSON.stringify({format:BACKUP_FORMAT,version:BACKUP_VERSION,createdAt:new Date().toISOString(),records,pathways,certifications});
 }
 
 export async function readBackup(text){
   let data;
   try{ data=JSON.parse(text); }catch{ throw new Error('This is not a valid JSON backup.'); }
-  if(data?.format!==BACKUP_FORMAT || ![1,2].includes(data?.version) || !Array.isArray(data.records)) throw new Error('Unsupported SDOC Arts backup format.');
+  if(data?.format!==BACKUP_FORMAT || ![1,2,3].includes(data?.version) || !Array.isArray(data.records)) throw new Error('Unsupported SDOC Arts backup format.');
   const ids=new Set(),records=[];
   for(const entry of data.records){
     if(!entry || typeof entry!=='object' || typeof entry.id!=='string' || !/^IMP-[0-9]+$/.test(entry.id) || ids.has(entry.id) ||
@@ -63,5 +63,10 @@ export async function readBackup(text){
   for(const p of pathways){
     if(!p || typeof p!=='object' || typeof p.code!=='string' || !p.code.trim()) throw new Error('Backup contains an invalid pathway classification.');
   }
-  return {records,pathways};
+  const certifications=data.version>=3 ? data.certifications : [];
+  if(!Array.isArray(certifications)) throw new Error('Backup certification records are invalid.');
+  for(const c of certifications){
+    if(!c || typeof c!=='object' || typeof c.id!=='string' || !['synthetic-acceptance','golden'].includes(c.id)) throw new Error('Backup contains an invalid certification record.');
+  }
+  return {records,pathways,certifications};
 }
