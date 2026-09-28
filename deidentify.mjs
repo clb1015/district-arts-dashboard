@@ -33,8 +33,11 @@ export async function anonymizeIdentifier(value,keyBase64,namespace='SDOC-ARTS-V
 
 export function recommendedDropColumns(headers){
   const patterns=[
-    /(^|\b)(first|last|middle|full)?\s*name(\b|$)/i,
-    /email/i,/e-mail/i,/address/i,/phone/i,/mobile/i,/dob/i,/birth/i,
+    /(^|\b)(student|legal|preferred|first|last|middle|full)\s*name(\b|$)/i,
+    /student.*email|email.*student|(^|\b)e-?mail(\b|$)/i,
+    /student.*address|home.*address|mailing.*address/i,
+    /student.*phone|home.*phone|mobile.*phone|cell.*phone/i,
+    /(^|\b)dob(\b|$)|date.*birth|birth.*date/i,
     /guardian/i,/parent/i,/ssn/i,/social security/i
   ];
   return headers.filter(h=>patterns.some(p=>p.test(String(h))));
