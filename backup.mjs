@@ -1,5 +1,5 @@
 export const BACKUP_FORMAT='sdoc-arts-import-backup';
-export const BACKUP_VERSION=1;
+export const BACKUP_VERSION=2;
 
 async function checksum(bytes){
   const digest=await crypto.subtle.digest('SHA-256',bytes);
@@ -21,7 +21,7 @@ function decode(value){
   return Uint8Array.from(binary,c=>c.charCodeAt(0));
 }
 
-export async function createBackup(imports){
+export async function createBackup(imports,pathways=[]){
   const records=[];
   for(const record of imports){
     const {sourceFile,...metadata}=record;
@@ -32,13 +32,13 @@ export async function createBackup(imports){
     }
     records.push({...metadata,source});
   }
-  return JSON.stringify({format:BACKUP_FORMAT,version:BACKUP_VERSION,createdAt:new Date().toISOString(),records});
+  return JSON.stringify({format:BACKUP_FORMAT,version:BACKUP_VERSION,createdAt:new Date().toISOString(),records,pathways});
 }
 
 export async function readBackup(text){
   let data;
   try{ data=JSON.parse(text); }catch{ throw new Error('This is not a valid JSON backup.'); }
-  if(data?.format!==BACKUP_FORMAT || data?.version!==BACKUP_VERSION || !Array.isArray(data.records)) throw new Error('Unsupported SDOC Arts backup format.');
+  if(data?.format!==BACKUP_FORMAT || ![1,2].includes(data?.version) || !Array.isArray(data.records)) throw new Error('Unsupported SDOC Arts backup format.');
   const ids=new Set(),records=[];
   for(const entry of data.records){
     if(!entry || typeof entry!=='object' || typeof entry.id!=='string' || !/^IMP-[0-9]+$/.test(entry.id) || ids.has(entry.id) ||
@@ -58,5 +58,10 @@ export async function readBackup(text){
     }
     records.push({...metadata,sourceFile});
   }
-  return records;
+  const pathways=data.version>=2 ? data.pathways : [];
+  if(!Array.isArray(pathways)) throw new Error('Backup pathway dictionary is invalid.');
+  for(const p of pathways){
+    if(!p || typeof p!=='object' || typeof p.code!=='string' || !p.code.trim()) throw new Error('Backup contains an invalid pathway classification.');
+  }
+  return {records,pathways};
 }
