@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  proposeMappings,mappingFromSuggestions,normalizeTerm,normalizeCourseCode,analyzeImport,certificationGate
+  proposeMappings,mappingFromSuggestions,normalizeTerm,normalizeCourseCode,analyzeImport,certificationGate,matchCourseReference
 } from '../core.mjs';
 
 const rows = [
@@ -21,10 +21,10 @@ const rows = [
 rows.push({...rows[0],__row_number:14});
 const headers=Object.keys(rows[0]).filter(k=>!k.startsWith('__'));
 const ref = new Map([
-  ['1302300',{code:'1302300',title:'Band 1'}],
-  ['1302310',{code:'1302310',title:'Band 2'}],
-  ['0400310',{code:'0400310',title:'Theatre 1'}],
-  ['0400410',{code:'0400410',title:'Technical Theatre: Design & Production 1'}],
+  ['1302300',{code:'1302300',abbreviatedTitle:'BAND 1',title:'Band 1',discipline:'Music Education',gradeBand:'Grades 9-12'}],
+  ['1302310',{code:'1302310',abbreviatedTitle:'BAND 2',title:'Band 2',discipline:'Music Education',gradeBand:'Grades 9-12'}],
+  ['0400310',{code:'0400310',abbreviatedTitle:'THEATRE 1',title:'Theatre 1',discipline:'Drama / Theatre Arts',gradeBand:'Grades 9-12'}],
+  ['0400410',{code:'0400410',abbreviatedTitle:'TECH THEATRE 1',title:'Technical Theatre: Design & Production 1',discipline:'Drama / Theatre Arts',gradeBand:'Grades 9-12'}],
 ]);
 
 test('mapping finds all nine canonical fields',()=>{
@@ -55,31 +55,37 @@ test('course codes preserve or restore leading zero from official reference',()=
   assert.equal(normalizeCourseCode('400310',[...ref.keys()]).normalized,'0400310');
 });
 
-test('first-pass synthetic import exposes intended review cases only',()=>{
+test('first-pass synthetic import auto-excludes rows outside the Florida arts reference',()=>{
   const mapping=mappingFromSuggestions(proposeMappings(headers,rows));
   const a=analyzeImport(rows,mapping,ref);
   assert.equal(a.counts.sourceRows,13);
   assert.equal(a.counts.exactDuplicates,1);
-  assert.equal(a.counts.held,2);
+  assert.equal(a.counts.held,1);
+  assert.equal(a.counts.excluded,1);
+  assert.equal(a.counts.autoReferenceExcluded,1);
   assert.equal(a.counts.accepted,10);
   assert.equal(a.uniqueStudents,8);
   assert.equal(a.issues.filter(i=>i.type==='Unknown Term').length,1);
-  assert.equal(a.issues.filter(i=>i.type==='Questionable Course Code').length,1);
+  assert.equal(a.issues.filter(i=>i.type==='Questionable Course Code').length,0);
+  assert.equal(a.rows.find(r=>r.mapped.student_id==='SYN-0008').disposition,'excluded');
+  assert.equal(a.rows.find(r=>r.mapped.student_id==='SYN-0008').exclusionReason,'No code or title match in Florida arts reference');
   assert.equal(a.rows.filter(r=>r.mapped.student_id==='SYN-0002' && r.disposition==='accepted').length,2);
   assert.equal(a.rows.find(r=>r.mapped.student_id==='SYN-0003').disposition,'accepted');
   assert.equal(a.reconciles,true);
   assert.equal(certificationGate(a).ready,false);
 });
 
-test('resolved synthetic import becomes import-ready and retains local unknown course',()=>{
+test('resolved synthetic import becomes import-ready with non-reference courses excluded',()=>{
   const mapping=mappingFromSuggestions(proposeMappings(headers,rows));
-  const resolutions={terms:{T2:'Spring'},courses:{9999999:{action:'local'}}};
+  const resolutions={terms:{T2:'Spring'},courses:{},duplicates:{}};
   const a=analyzeImport(rows,mapping,ref,resolutions);
   assert.equal(a.counts.sourceRows,13);
   assert.equal(a.counts.exactDuplicates,1);
   assert.equal(a.counts.held,0);
-  assert.equal(a.counts.accepted,12);
-  assert.equal(a.uniqueStudents,10);
+  assert.equal(a.counts.excluded,1);
+  assert.equal(a.counts.autoReferenceExcluded,1);
+  assert.equal(a.counts.accepted,11);
+  assert.equal(a.uniqueStudents,9);
   assert.equal(a.rows.filter(r=>r.mapped.student_id==='SYN-0002' && r.disposition==='accepted').length,2);
   assert.equal(a.rows.find(r=>r.mapped.student_id==='SYN-0003').disposition,'accepted');
   assert.equal(a.reconciles,true);
@@ -96,13 +102,26 @@ test('non-pseudonymous student keys are held and block import readiness',()=>{
   assert.equal(certificationGate(a).ready,false);
 });
 
-test('manual course mapping must point to an actual reference code',()=>{
-  const one=[{...rows[9],__row_number:2}];
+test('exact normalized course title keeps a row even when the source code does not match',()=>{
+  const one=[{...rows[5],'Course Num':'LOCAL-THEATRE','Class Name':'Theatre 1',__row_number:2}];
   const mapping=mappingFromSuggestions(proposeMappings(headers,one));
-  const a=analyzeImport(one,mapping,ref,{terms:{},courses:{9999999:{action:'map',target:'1234567'}}});
-  assert.equal(a.counts.held,1);
-  assert.equal(a.issues.filter(i=>i.type==='Course Mapping Invalid').length,1);
-  assert.equal(certificationGate(a).ready,false);
+  const a=analyzeImport(one,mapping,ref);
+  assert.equal(a.counts.accepted,1);
+  assert.equal(a.counts.excluded,0);
+  assert.equal(a.rows[0].mapped.course_match_type,'title-exact');
+  assert.equal(a.rows[0].mapped.reference_code,'0400310');
+  assert.equal(a.fldoeCoverage,1);
+});
+
+test('a row matching neither Florida code nor title is automatically excluded rather than held',()=>{
+  const one=[{...rows[9],'Course Num':'9999999','Class Name':'Algebra 1',__row_number:2}];
+  const mapping=mappingFromSuggestions(proposeMappings(headers,one));
+  const a=analyzeImport(one,mapping,ref);
+  assert.equal(a.counts.accepted,0);
+  assert.equal(a.counts.held,0);
+  assert.equal(a.counts.excluded,1);
+  assert.equal(a.counts.autoReferenceExcluded,1);
+  assert.equal(a.rows[0].exclusionReason,'No code or title match in Florida arts reference');
 });
 
 test('administrative waivers stay in source audit but out of enrollment and coverage',()=>{
