@@ -1,7 +1,8 @@
 const DB_NAME='sdoc-arts-importer';
-const DB_VERSION=2;
+const DB_VERSION=3;
 const IMPORTS='imports';
 const PATHWAYS='pathways';
+const CERTIFICATIONS='certifications';
 
 function openDb(){
   return new Promise((resolve,reject)=>{
@@ -10,6 +11,7 @@ function openDb(){
       const db=req.result;
       if(!db.objectStoreNames.contains(IMPORTS)) db.createObjectStore(IMPORTS,{keyPath:'id'});
       if(!db.objectStoreNames.contains(PATHWAYS)) db.createObjectStore(PATHWAYS,{keyPath:'code'});
+      if(!db.objectStoreNames.contains(CERTIFICATIONS)) db.createObjectStore(CERTIFICATIONS,{keyPath:'id'});
     };
     req.onsuccess=()=>resolve(req.result);
     req.onerror=()=>reject(req.error);
@@ -94,6 +96,35 @@ export async function restorePathways(records){
     const store=tx.objectStore(PATHWAYS);
     const complete=new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Pathway restore failed.'));});
     records.forEach(record=>{ if(record?.code) store.put(record); });
+    await complete;
+  }finally{ db.close(); }
+}
+
+
+export async function getCertification(id='golden'){
+  const db=await openDb(); const tx=db.transaction(CERTIFICATIONS,'readonly');
+  const value=await reqPromise(tx.objectStore(CERTIFICATIONS).get(id)); db.close(); return value||null;
+}
+
+export async function saveCertification(record){
+  if(!record?.id) throw new Error('Certification record requires an id.');
+  const db=await openDb(); const tx=db.transaction(CERTIFICATIONS,'readwrite');
+  await reqPromise(tx.objectStore(CERTIFICATIONS).put(record)); db.close(); return record;
+}
+
+export async function listCertifications(){
+  const db=await openDb(); const tx=db.transaction(CERTIFICATIONS,'readonly');
+  const all=await reqPromise(tx.objectStore(CERTIFICATIONS).getAll()); db.close(); return all;
+}
+
+export async function restoreCertifications(records){
+  if(!Array.isArray(records) || !records.length) return;
+  const db=await openDb();
+  try{
+    const tx=db.transaction(CERTIFICATIONS,'readwrite');
+    const store=tx.objectStore(CERTIFICATIONS);
+    const complete=new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Certification restore failed.'));});
+    records.forEach(record=>{ if(record?.id) store.put(record); });
     await complete;
   }finally{ db.close(); }
 }
