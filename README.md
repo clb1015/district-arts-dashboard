@@ -75,7 +75,7 @@ Administrative waiver codes `1500440`, `1500441`, `1500442`, and `1500445` appea
 
 ## Local audit backup
 
-The intake owner should prepare and download a new audit backup after each import or withdrawal. The JSON contains import history, mapping and resolution decisions, raw rows, accepted records, audit metadata, and byte-preserved source files with SHA-256 checksums. Keep it in district-approved protected local storage. Restore only in a fresh browser profile with empty import history; invalid or altered source bytes are rejected before any records are written. The app does not transmit the backup to a server. A saved source file alone is not a complete audit backup.
+The intake owner should prepare and download a new audit backup after each import or withdrawal. The JSON contains import history, mapping and resolution decisions, raw rows, accepted records, audit metadata, and byte-preserved source files where available, with SHA-256 checksums. Imports created before source-byte preservation retain raw rows but cannot regain original bytes from the backup; keep those original files separately. The UI warns when this applies. Keep the backup in district-approved protected local storage. Restore only in a fresh browser profile with empty import history; invalid or altered source bytes are rejected before any records are written. The app does not transmit the backup to a server. A saved source file alone is not a complete audit backup.
 
 
 ## Acceptance status

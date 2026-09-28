@@ -225,14 +225,15 @@ $('backupBtn').addEventListener('click',async()=>{
   try{
     const imports=await listImports();
     if(!imports.length) throw new Error('No import history exists to back up.');
+    const missingSources=imports.filter(i=>!i.sourceFile).length;
     if(backupUrl) URL.revokeObjectURL(backupUrl);
     backupUrl=URL.createObjectURL(new Blob([await createBackup(imports)],{type:'application/json'}));
     const link=$('backupLink');
     link.href=backupUrl;
     link.download=`sdoc-arts-audit-${new Date().toISOString().slice(0,10)}.json`;
     link.hidden=false;
-    label.textContent=`Backup ready: ${fmt(imports.length)} imports. Click Download backup and save it in district-approved protected storage.`;
-    label.className='status success';
+    label.textContent=`Backup ready: ${fmt(imports.length)} imports. ${missingSources?`${fmt(missingSources)} older import${missingSources===1?' has':'s have'} raw rows but no original source bytes; keep those original files separately. `:''}Click Download backup and save it in district-approved protected storage.`;
+    label.className=`status ${missingSources?'warning':'success'}`;
   }catch(e){label.textContent=e.message;label.className='status error';}
 });
 
@@ -244,10 +245,11 @@ $('restoreBtn').addEventListener('click',async()=>{
     if((await listImports()).length) throw new Error('Restore requires an empty import history. Use a fresh browser profile.');
     const records=await readBackup(await file.text());
     if(!records.length) throw new Error('Backup contains no imports.');
+    const missingSources=records.filter(r=>!r.sourceFile).length;
     await restoreImports(records);
     await renderHistory();
-    label.textContent=`Restored ${fmt(records.length)} imports with source files and audit history.`;
-    label.className='status success';
+    label.textContent=`Restored ${fmt(records.length)} imports and audit history. ${missingSources?`${fmt(missingSources)} older import${missingSources===1?' has':'s have'} raw rows but no original source bytes; keep those original files separately.`:'Original source files were restored.'}`;
+    label.className=`status ${missingSources?'warning':'success'}`;
   }catch(e){label.textContent=e.message||String(e);label.className='status error';}
 });
 

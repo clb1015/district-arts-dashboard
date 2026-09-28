@@ -19,6 +19,9 @@ test('audit backup round-trips a source file, withdrawn status, raw rows, and re
   assert.equal(restored[0].rawRows[0]['Local Extra'],'preserved');
   assert.equal(restored[0].resolutions.terms.T2,'Spring');
   assert.deepEqual(new Uint8Array(await restored[0].sourceFile.arrayBuffer()),bytes);
+  const legacy=await readBackup(await createBackup([{...record,id:'IMP-87654321',sourceFile:null}]));
+  assert.equal(legacy[0].sourceFile,null);
+  assert.equal(legacy[0].rawRows[0]['Local Extra'],'preserved');
 
   const tampered=JSON.parse(await createBackup([record]));
   tampered.records[0].source.base64=Buffer.from('altered').toString('base64');
